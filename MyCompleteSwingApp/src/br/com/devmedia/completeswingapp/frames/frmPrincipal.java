@@ -73,7 +73,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon-customer.png"))); // NOI18N
-        jButton2.setText("Costumers");
+        jButton2.setText("Customers");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {

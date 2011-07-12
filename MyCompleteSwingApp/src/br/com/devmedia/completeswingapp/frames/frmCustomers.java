@@ -159,7 +159,12 @@ public class frmCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Select the customer to edit!");
+            return;
+        }
+        frmUpdateCustomer dialog = new frmUpdateCustomer(new javax.swing.JFrame(), true, dao, this, customers.get(jTable1.getSelectedRow()));
+        dialog.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
