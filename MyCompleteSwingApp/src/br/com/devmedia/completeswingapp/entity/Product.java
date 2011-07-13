@@ -5,6 +5,7 @@
 
 package br.com.devmedia.completeswingapp.entity;
 
+import br.com.devmedia.completeswingapp.frames.SwingColumn;
 import java.io.Serializable;
 
 /**
@@ -13,9 +14,13 @@ import java.io.Serializable;
  */
 public class Product implements Serializable {
 
+    @SwingColumn(description="Id", colorOfBackgound="")
     private Integer id;
+    @SwingColumn(description="Name", colorOfBackgound="")
     private String name;
+    @SwingColumn(description="Price", colorOfBackgound="")
     private float price;
+    @SwingColumn(description="# in Stock", colorOfBackgound="")
     private int stock;
 
     public Product() {
