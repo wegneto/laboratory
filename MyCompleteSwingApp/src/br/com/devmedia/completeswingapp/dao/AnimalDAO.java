@@ -47,6 +47,16 @@ public class AnimalDAO extends GenericDAO {
         rs.close();
         return animal;
     }
+    
+    public List<Animal> getAllAnimals() throws SQLException {
+        ResultSet rs = executeQuery("select * from APP.ANIMAL");
+        List<Animal> animals = new LinkedList<Animal>();
+        while (rs.next()) {
+            animals.add(populateAnimal(rs));
+        }
+        rs.close();
+        return animals;
+    }
 
     public List<Animal> getAnimalByName(String name) throws SQLException {
         List<Animal> animals = new LinkedList<Animal>();
