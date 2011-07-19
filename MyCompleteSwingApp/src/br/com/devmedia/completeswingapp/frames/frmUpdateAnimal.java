@@ -26,18 +26,21 @@ import javax.swing.JOptionPane;
  *
  * @author wegneto
  */
-public class frmAddAnimal extends javax.swing.JDialog {
+public class frmUpdateAnimal extends javax.swing.JDialog {
 
     private final AnimalDAO dao;
     private final frmAnimals parentForm;
+    private Animal animal;
 
     /** Creates new form frmAddAnimal */
-    public frmAddAnimal(java.awt.Frame parent, boolean modal, AnimalDAO dao, frmAnimals parentForm) {
+    public frmUpdateAnimal(java.awt.Frame parent, boolean modal, AnimalDAO dao, frmAnimals parentForm, Animal animal) {
         super(parent, modal);
         this.parentForm = parentForm;
         this.dao = dao;
+        this.animal = animal;
         initComponents();
         loadInitialComboData();
+        loadAnimalData();
         txtName.requestFocus();
     }
 
@@ -65,7 +68,7 @@ public class frmAddAnimal extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add Animal");
+        setTitle("Update Animal");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -84,7 +87,7 @@ public class frmAddAnimal extends javax.swing.JDialog {
 
         cmbType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Ok");
+        jButton1.setText("Update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -201,19 +204,17 @@ public class frmAddAnimal extends javax.swing.JDialog {
         }
 
         try {
-
-            Animal animal = new Animal();
             animal.setName(txtName.getText());
             animal.setBreed(txtBreed.getText());
             animal.setType((AnimalType) cmbType.getSelectedItem());
             animal.setOwner((Customer) cmbOwner.getSelectedItem());
             animal.setAge(Integer.parseInt(txtAge.getText()));
-            dao.addAnimal(animal);
+            dao.updateAnimal(animal);
             parentForm.loadInitialData();
             setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error adding new animal, try again!");
+            JOptionPane.showMessageDialog(this, "Error updating animal, try again!");
         }
 
 
@@ -254,5 +255,13 @@ public class frmAddAnimal extends javax.swing.JDialog {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Errors loading the customer list");
         }
+    }
+
+    private void loadAnimalData() {
+        txtName.setText(animal.getName());
+        txtAge.setText(String.valueOf(animal.getAge()));
+        txtBreed.setText(animal.getBreed());
+        cmbType.setSelectedItem(animal.getType());
+        cmbOwner.setSelectedItem(animal.getOwner());
     }
 }

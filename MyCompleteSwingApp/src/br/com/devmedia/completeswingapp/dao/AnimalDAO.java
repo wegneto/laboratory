@@ -49,7 +49,7 @@ public class AnimalDAO extends GenericDAO {
     }
     
     public List<Animal> getAllAnimals() throws SQLException {
-        ResultSet rs = executeQuery("select * from APP.ANIMAL");
+        ResultSet rs = executeQuery("select * from APP.ANIMALS");
         List<Animal> animals = new LinkedList<Animal>();
         while (rs.next()) {
             animals.add(populateAnimal(rs));

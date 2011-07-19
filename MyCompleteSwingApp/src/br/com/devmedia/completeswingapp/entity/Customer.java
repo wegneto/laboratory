@@ -81,6 +81,11 @@ public class Customer implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return getName();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

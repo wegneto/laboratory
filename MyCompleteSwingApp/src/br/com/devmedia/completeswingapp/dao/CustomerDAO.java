@@ -68,7 +68,7 @@ public class CustomerDAO extends GenericDAO {
     public List<Customer> getAllCustomers() throws SQLException {
         ResultSet rs = executeQuery("SELECT * FROM APP.CUSTOMERS");
         List<Customer> customers = new LinkedList<Customer>();
-        if (rs.next()) {
+        while (rs.next()) {
             customers.add(populateCustomer(rs));
         }
         rs.close();

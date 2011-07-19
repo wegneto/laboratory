@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,12 +57,32 @@ public class frmAnimals extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Remove");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,16 +151,61 @@ public class frmAnimals extends javax.swing.JDialog {
         setBounds((screenSize.width-539)/2, (screenSize.height-490)/2, 539, 490);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        frmAddAnimal dialog = new frmAddAnimal(new javax.swing.JFrame(), true, dao, this);
+        dialog.setVisible(true);
+        loadInitialData();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (tblAnimals.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Select an animal to remove.");
+            return;
+        }
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure?", "Remove animal", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (result != 0) {
+            return;
+        }
+
+        try {
+            dao.removeAnimal(animals.get(tblAnimals.getSelectedRow()).getId());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error removing the animal", "Remove animal", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        loadInitialData();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        if (tblAnimals.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Select an animal to update.");
+            return;
+        }
+        
+        frmUpdateAnimal dialog = new frmUpdateAnimal(new javax.swing.JFrame(), true, dao, this, animals.get(tblAnimals.getSelectedRow()));
+        dialog.setVisible(true);
+        loadInitialData();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 frmAnimals dialog = new frmAnimals(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
+                    
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -158,12 +224,12 @@ public class frmAnimals extends javax.swing.JDialog {
     private javax.swing.JTable tblAnimals;
     // End of variables declaration//GEN-END:variables
 
-    private void loadInitialData() {
+    public void loadInitialData() {
         try {
             animals = dao.getAllAnimals();
             tblAnimals.setModel(new MyTableModel(Animal.class, animals, tblAnimals));
         } catch (SQLException ex) {
-            
+            ex.printStackTrace();
         }
     }
 }
