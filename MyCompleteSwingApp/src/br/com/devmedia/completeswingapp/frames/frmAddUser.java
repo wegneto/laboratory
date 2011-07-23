@@ -14,8 +14,6 @@ package br.com.devmedia.completeswingapp.frames;
 import br.com.devmedia.completeswingapp.dao.UserDAO;
 import br.com.devmedia.completeswingapp.entity.User;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -119,15 +117,18 @@ public class frmAddUser extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRetryPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)))
+                                .addComponent(txtRetryPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -170,7 +171,7 @@ public class frmAddUser extends javax.swing.JDialog {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-416)/2, (screenSize.height-185)/2, 416, 185);
+        setBounds((screenSize.width-416)/2, (screenSize.height-210)/2, 416, 210);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtRetryPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRetryPasswordActionPerformed

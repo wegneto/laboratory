@@ -5,6 +5,7 @@
 
 package br.com.devmedia.completeswingapp.entity;
 
+import br.com.devmedia.completeswingapp.frames.SwingColumn;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -15,9 +16,12 @@ import java.sql.Date;
 public class Schedule implements Serializable {
 
     private Integer id;
+    @SwingColumn(description="Pet", colorOfBackgound="")
     private Animal animal;
+    @SwingColumn(description="Date", colorOfBackgound="")
     private Date date;
     private float total;
+    @SwingColumn(description="Type", colorOfBackgound="")
     private ScheduleType type;
 
     public Schedule() {
