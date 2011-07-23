@@ -5,6 +5,7 @@
 
 package br.com.devmedia.completeswingapp.entity;
 
+import br.com.devmedia.completeswingapp.frames.SwingColumn;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.LinkedList;
@@ -16,9 +17,13 @@ import java.util.List;
  */
 public class Sell implements Serializable {
 
+    @SwingColumn(description="Id")
     private Integer id;
+    @SwingColumn(description="Vendor")
     private User vendor;
+    @SwingColumn(description="Date of Sale")
     private Date dateOfSale;
+    @SwingColumn(description="Total")
     private float total;
     private List<SellItem> items = new LinkedList<SellItem>();
 

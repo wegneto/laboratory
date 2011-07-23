@@ -84,6 +84,16 @@ public class SellDAO extends GenericDAO {
         rs.close();
         return sell;
     }
+    
+    public List<Sell> getAllSells() throws SQLException {
+        ResultSet rs = executeQuery("SELECT * FROM APP.SELLS");
+        List<Sell> sells = new LinkedList<Sell>();
+        while (rs.next()) {
+            sells.add(populateSell(rs, true));
+        }
+        rs.close();
+        return sells;
+    }
 
     private Sell populateSell(ResultSet rs, boolean populateItems) throws SQLException {
         Sell sell = new Sell();
