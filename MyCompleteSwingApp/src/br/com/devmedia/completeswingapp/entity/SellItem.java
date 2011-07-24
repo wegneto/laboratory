@@ -5,6 +5,7 @@
 
 package br.com.devmedia.completeswingapp.entity;
 
+import br.com.devmedia.completeswingapp.frames.SwingColumn;
 import java.io.Serializable;
 
 /**
@@ -13,9 +14,12 @@ import java.io.Serializable;
  */
 public class SellItem implements Serializable {
 
+    @SwingColumn(description="Item Id")
     private Integer id;
+    @SwingColumn(description="Product")
     private Product product;
     private Sell sell;
+    @SwingColumn(description="Quantity")
     private int qnt;
 
     public SellItem() {

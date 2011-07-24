@@ -12,12 +12,15 @@ package br.com.devmedia.completeswingapp.frames;
 
 import br.com.devmedia.completeswingapp.dao.SellDAO;
 import br.com.devmedia.completeswingapp.entity.Sell;
+import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -34,6 +37,7 @@ public class frmSells extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         loadInitialData();
+        addSellTableListener();
     }
 
     /** This method is called from within the constructor to
@@ -65,6 +69,11 @@ public class frmSells extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update");
 
@@ -204,6 +213,11 @@ public class frmSells extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        frmAddSell dialog = new frmAddSell(new Frame(), true, dao, this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -227,5 +241,14 @@ public class frmSells extends javax.swing.JDialog {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading data " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void addSellTableListener() {
+        tblSells.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent lse) {
+                System.out.println("Value changed!!");
+            }
+        });
     }
 }

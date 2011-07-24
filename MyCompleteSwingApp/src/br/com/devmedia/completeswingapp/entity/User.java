@@ -89,4 +89,10 @@ public class User implements Serializable {
         hash = 23 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+        
 }
