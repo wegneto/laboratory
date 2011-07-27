@@ -141,6 +141,11 @@ public class frmAddSell extends javax.swing.JDialog {
         jButton1.setText("Remove Item");
 
         jButton2.setText("Add Item");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,6 +224,11 @@ public class frmAddSell extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        frmAddSellItem dialog = new frmAddSellItem(new javax.swing.JFrame(), true, itens, this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbVendor;
     private javax.swing.JButton jButton1;
@@ -250,7 +260,12 @@ public class frmAddSell extends javax.swing.JDialog {
 
     }
 
-    private void refreshItens() {
+    public void refreshItens() {
         tblItens.setModel(new MyTableModel(SellItem.class, itens, tblItens));
+        float value = 0;
+        for (SellItem sellItem : itens) {
+            value += (sellItem.getProduct().getPrice() * sellItem.getQnt());
+        }
+        txtTotal.setText("R$" + value);
     }
 }

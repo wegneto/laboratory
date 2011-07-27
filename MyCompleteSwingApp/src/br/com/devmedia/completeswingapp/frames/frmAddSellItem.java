@@ -10,7 +10,16 @@
  */
 package br.com.devmedia.completeswingapp.frames;
 
+import br.com.devmedia.completeswingapp.dao.ProductDAO;
+import br.com.devmedia.completeswingapp.entity.Product;
 import br.com.devmedia.completeswingapp.entity.SellItem;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,14 +27,18 @@ import br.com.devmedia.completeswingapp.entity.SellItem;
  */
 public class frmAddSellItem extends javax.swing.JDialog {
     
-    private final SellItem item = new SellItem();
+    private final List<SellItem> itens;
     
+    private final frmAddSell sellForm;
     
-
     /** Creates new form frmAddSellItem */
-    public frmAddSellItem(java.awt.Frame parent, boolean modal) {
+    public frmAddSellItem(java.awt.Frame parent, boolean modal, List<SellItem> itens, frmAddSell sellForm) {
         super(parent, modal);
+        this.itens = itens;
+        this.sellForm = sellForm;
         initComponents();
+        loadComboData();
+        
     }
 
     /** This method is called from within the constructor to
@@ -52,8 +65,18 @@ public class frmAddSellItem extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Product");
 
@@ -125,24 +148,37 @@ public class frmAddSellItem extends javax.swing.JDialog {
         setBounds((screenSize.width-541)/2, (screenSize.height-144)/2, 541, 144);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-            public void run() {
-                frmAddSellItem dialog = new frmAddSellItem(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Integer qty = Integer.parseInt(txtQty.getText());
+        
+        if (qty <= 0) {
+            JOptionPane.showMessageDialog(this, "Quantity must be > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtQty.requestFocus();
+            return;
+        }
+        
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure?", "Add new item", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if (result != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        try {
+            SellItem item = new SellItem();
+            item.setQnt(qty);
+            item.setProduct((Product)cmbProduct.getSelectedItem());
+            itens.add(item);
+            sellForm.refreshItens();
+            setVisible(false);
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbProduct;
     private javax.swing.JButton jButton1;
@@ -152,4 +188,13 @@ public class frmAddSellItem extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
+
+    private void loadComboData() {
+        try {
+            Vector<Product> products = new Vector<Product>(new ProductDAO().getAllProducts());
+            cmbProduct.setModel(new DefaultComboBoxModel(products));
+        } catch (SQLException ex) {
+            
+        }
+    }
 }

@@ -14,7 +14,6 @@ import java.io.Serializable;
  */
 public class SellItem implements Serializable {
 
-    @SwingColumn(description="Item Id")
     private Integer id;
     @SwingColumn(description="Product")
     private Product product;
