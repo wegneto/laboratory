@@ -20,6 +20,8 @@ public class SellItem implements Serializable {
     private Sell sell;
     @SwingColumn(description="Quantity")
     private int qnt;
+    @SwingColumn(description="Total")
+    private float itemTotal;
 
     public SellItem() {
     }
@@ -88,5 +90,15 @@ public class SellItem implements Serializable {
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
+
+    public float getItemTotal() {
+        return itemTotal;
+    }
+
+    public void setItemTotal(float itemTotal) {
+        this.itemTotal = itemTotal;
+    }
+    
+    
     
 }

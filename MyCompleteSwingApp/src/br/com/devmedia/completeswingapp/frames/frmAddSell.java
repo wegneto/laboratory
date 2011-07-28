@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -33,7 +35,6 @@ public class frmAddSell extends javax.swing.JDialog {
     private List<SellItem> itens = new LinkedList<SellItem>();
     private final SellDAO dao;
     private final UserDAO userDAO = new UserDAO();
-    private final Sell sell = new Sell();
     private final frmSells parentFrame;
 
     /** Creates new form frmAddSell */
@@ -139,6 +140,11 @@ public class frmAddSell extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblItens);
 
         jButton1.setText("Remove Item");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Add Item");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +189,11 @@ public class frmAddSell extends javax.swing.JDialog {
         });
 
         jButton4.setText("Ok");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,6 +240,54 @@ public class frmAddSell extends javax.swing.JDialog {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (tblItens.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure?", "Remove item", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (result != 0) {
+            return;
+        }
+
+        itens.remove(tblItens.getSelectedRow());
+        refreshItens();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (itens.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "The item list is empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (result != 0) {
+            return;
+        }
+
+        try {
+            Sell sell = new Sell();
+            sell.setDateOfSale(new java.sql.Date(new Date().getTime()));
+            sell.setTotal(Float.parseFloat(txtTotal.getText().substring(2)));
+            
+            for (SellItem sellItem : itens) {
+                sellItem.setSell(sell);
+            }
+            
+            sell.setItems(itens);
+            sell.setVendor((User)cmbVendor.getSelectedItem());
+            dao.addSell(sell, true);
+            parentFrame.loadInitialData();
+            setVisible(false);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error savin sell", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbVendor;
     private javax.swing.JButton jButton1;
@@ -261,11 +320,12 @@ public class frmAddSell extends javax.swing.JDialog {
     }
 
     public void refreshItens() {
-        tblItens.setModel(new MyTableModel(SellItem.class, itens, tblItens));
         float value = 0;
         for (SellItem sellItem : itens) {
             value += (sellItem.getProduct().getPrice() * sellItem.getQnt());
+            sellItem.setItemTotal(sellItem.getProduct().getPrice() * sellItem.getQnt());
         }
+        tblItens.setModel(new MyTableModel(SellItem.class, itens, tblItens));
         txtTotal.setText("R$" + value);
     }
 }
