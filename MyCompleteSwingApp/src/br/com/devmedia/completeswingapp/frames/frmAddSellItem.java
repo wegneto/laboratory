@@ -27,13 +27,23 @@ public class frmAddSellItem extends javax.swing.JDialog {
     
     private final List<SellItem> itens;
     
-    private final frmAddSell sellForm;
+    private frmAddSell sellForm;
+    private frmUpdateSell updateForm;
     
     /** Creates new form frmAddSellItem */
     public frmAddSellItem(java.awt.Frame parent, boolean modal, List<SellItem> itens, frmAddSell sellForm) {
         super(parent, modal);
         this.itens = itens;
         this.sellForm = sellForm;
+        initComponents();
+        loadComboData();
+        
+    }
+    
+    public frmAddSellItem(java.awt.Frame parent, boolean modal, List<SellItem> itens, frmUpdateSell updateForm) {
+        super(parent, modal);
+        this.itens = itens;
+        this.updateForm = updateForm;
         initComponents();
         loadComboData();
         
@@ -170,7 +180,11 @@ public class frmAddSellItem extends javax.swing.JDialog {
             item.setQnt(qty);
             item.setProduct((Product)cmbProduct.getSelectedItem());
             itens.add(item);
-            sellForm.refreshItens();
+            if (sellForm != null) {
+                sellForm.refreshItens();
+            } else {
+                updateForm.refreshItens();
+            }
             setVisible(false);
         } catch (Exception e) {
         }

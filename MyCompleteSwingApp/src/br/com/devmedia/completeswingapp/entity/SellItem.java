@@ -92,13 +92,14 @@ public class SellItem implements Serializable {
     }
 
     public float getItemTotal() {
+        if (getProduct() != null) {
+            return getProduct().getPrice() * qnt;
+        }
         return itemTotal;
     }
 
     public void setItemTotal(float itemTotal) {
         this.itemTotal = itemTotal;
     }
-    
-    
     
 }

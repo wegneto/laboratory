@@ -12,6 +12,7 @@ package br.com.devmedia.completeswingapp.frames;
 
 import br.com.devmedia.completeswingapp.dao.SellDAO;
 import br.com.devmedia.completeswingapp.entity.Sell;
+import br.com.devmedia.completeswingapp.entity.SellItem;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -27,9 +28,8 @@ import javax.swing.event.ListSelectionListener;
  * @author wegneto
  */
 public class frmSells extends javax.swing.JDialog {
-    
+
     private List<Sell> sells = new LinkedList<Sell>();
-    
     private final SellDAO dao = new SellDAO();
 
     /** Creates new form frmSells */
@@ -76,8 +76,18 @@ public class frmSells extends javax.swing.JDialog {
         });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Remove");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Back");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -152,13 +162,10 @@ public class frmSells extends javax.swing.JDialog {
 
         tblItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(tblItens);
@@ -167,7 +174,6 @@ public class frmSells extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
@@ -175,7 +181,6 @@ public class frmSells extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
@@ -218,6 +223,36 @@ public class frmSells extends javax.swing.JDialog {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (tblSells.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a sell to update", "Update sell", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        frmUpdateSell dialog = new frmUpdateSell(new javax.swing.JFrame(), true, dao, this, sells.get(tblSells.getSelectedRow()));
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (tblSells.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a sell to remove", "Remove sell", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure?", "Remove sell", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                dao.removeSell(sells.get(tblSells.getSelectedRow()).getId());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error removing sell " + ex, "Remove sell", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        loadInitialData();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -247,7 +282,13 @@ public class frmSells extends javax.swing.JDialog {
         tblSells.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent lse) {
-                System.out.println("Value changed!!");
+                try {
+                    Sell selectedSell = sells.get(tblSells.getSelectedRow());
+                    tblItens.setModel(new MyTableModel(SellItem.class, selectedSell.getItems(), tblItens));
+
+                } catch (Exception e) {
+                }
+
             }
         });
     }
