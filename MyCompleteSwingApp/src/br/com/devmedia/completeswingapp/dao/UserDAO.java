@@ -61,4 +61,17 @@ public class UserDAO extends GenericDAO {
         return usr;
         
     }
+    
+    public boolean isValidUserAndPassword(String user, String password) throws SQLException  {
+        boolean result = false;
+        String query =  "SELECT * FROM APP.USERS WHERE LOGIN = ? AND PASSWORD = ?";
+        ResultSet rs = executeQuery(query, user, password);
+        if (rs.next()) {
+            result = true;
+        }
+        rs.close();
+        return result;
+        
+    }
+    
 }
