@@ -2,7 +2,6 @@ package com.wilsonguimaraes;
 
 import javax.inject.Inject;
 
-import org.jboss.weld.environment.se.StartMain;
 import org.slf4j.Logger;
 
 public class HelloWorld {
