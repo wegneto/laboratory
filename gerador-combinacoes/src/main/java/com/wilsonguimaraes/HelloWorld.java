@@ -12,10 +12,5 @@ public class HelloWorld {
 	public void say() {
 		logger.info("Saying hello on console");
 	}
-	
-	public static void main(String[] args) {
-		//new StartMain(args).go();
-		System.out.println("teste");
-	}
-	
+
 }
