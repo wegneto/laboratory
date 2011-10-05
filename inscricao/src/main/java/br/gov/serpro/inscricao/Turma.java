@@ -19,6 +19,9 @@ public class Turma {
 	private ArrayList<String> alunos = new ArrayList<String>();
 
 	public void matricular(String aluno) {
+		if (estaMatriculado(aluno)) {
+			throw new RuntimeException();
+		}
 		alunos.add(aluno);
 		logger.info(bundle.getString("cadastro.aluno.sucesso", aluno));
 	}

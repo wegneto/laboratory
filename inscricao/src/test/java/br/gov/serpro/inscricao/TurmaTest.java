@@ -25,5 +25,19 @@ public class TurmaTest {
 		Assert.assertTrue(turma.estaMatriculado(aluno));
 		
 	}
+	
+	@Test
+	public void falhaAoCadastrarDuplicado() {
+		String aluno = "Aluno 1";
+		
+		turma.matricular(aluno);
+		
+		try {
+			turma.matricular(aluno);
+			Assert.fail();
+		} catch (RuntimeException e) {
+		}
+		
+	}
 
 }
