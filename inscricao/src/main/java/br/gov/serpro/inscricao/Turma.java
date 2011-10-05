@@ -20,7 +20,7 @@ public class Turma {
 
 	public void matricular(String aluno) {
 		alunos.add(aluno);
-		logger.info(bundle.getString("cadastro.aluno.sucesso"));
+		logger.info(bundle.getString("cadastro.aluno.sucesso", aluno));
 	}
 
 	public boolean estaMatriculado(String aluno) {
