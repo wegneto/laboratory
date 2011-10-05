@@ -6,16 +6,21 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import br.gov.frameworkdemoiselle.util.ResourceBundle;
+
 public class Turma {
 
 	@Inject
 	private Logger logger;
 	
+	@Inject
+	private ResourceBundle bundle;
+	
 	private ArrayList<String> alunos = new ArrayList<String>();
 
 	public void matricular(String aluno) {
 		alunos.add(aluno);
-		logger.info("Cadastro realizado com sucesso");
+		logger.info(bundle.getString("cadastro.aluno.sucesso"));
 	}
 
 	public boolean estaMatriculado(String aluno) {
