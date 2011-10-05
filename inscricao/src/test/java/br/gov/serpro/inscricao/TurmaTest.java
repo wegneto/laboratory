@@ -39,5 +39,21 @@ public class TurmaTest {
 		}
 		
 	}
+	
+	@Test
+	public void falhaAoCadastrarAcimaDoLimite() {
+		turma.matricular("Aluno 1");
+		turma.matricular("Aluno 2");
+		turma.matricular("Aluno 3");
+		turma.matricular("Aluno 4");
+		turma.matricular("Aluno 5");
+		
+		try {
+			turma.matricular("Aluno 6");
+			Assert.fail();
+		} catch (RuntimeException e) {
+		}
+		
+	}
 
 }

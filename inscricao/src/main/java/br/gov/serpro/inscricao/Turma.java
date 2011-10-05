@@ -19,7 +19,7 @@ public class Turma {
 	private ArrayList<String> alunos = new ArrayList<String>();
 
 	public void matricular(String aluno) {
-		if (estaMatriculado(aluno)) {
+		if (estaMatriculado(aluno) || alunos.size() >= 5) {
 			throw new RuntimeException();
 		}
 		alunos.add(aluno);
