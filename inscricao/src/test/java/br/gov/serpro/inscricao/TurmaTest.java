@@ -1,5 +1,7 @@
 package br.gov.serpro.inscricao;
 
+import javax.inject.Inject;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -10,9 +12,11 @@ import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 @RunWith(DemoiselleRunner.class)
 public class TurmaTest {
 	
+	@Inject
+	private Turma turma;
+	
 	@Test
 	public void cadastrarComSucesso() {
-		Turma turma = new Turma();
 		
 		String aluno = "Aluno 1";
 		
