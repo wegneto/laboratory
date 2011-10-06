@@ -60,7 +60,7 @@ public class TurmaTest {
 			turma.matricular(new Aluno("Aluno " + i));
 		}
 
-		turma.matricular(new Aluno("Aluno 5"));
+		turma.matricular(new Aluno("Aluno 6"));
 		Assert.fail();
 	}
 
