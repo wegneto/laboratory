@@ -18,7 +18,7 @@ import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 public class TurmaTest {
 	
 	@Inject
-	private Turma turma;
+	private TurmaBC turma;
 	
 	@Inject
 	private EntityManager entityManager;

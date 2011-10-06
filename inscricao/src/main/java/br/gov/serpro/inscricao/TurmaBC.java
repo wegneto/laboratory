@@ -12,7 +12,7 @@ import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 @Controller
-public class Turma {
+public class TurmaBC {
 
 	@Inject
 	private Logger logger;
@@ -43,7 +43,7 @@ public class Turma {
 
 		entityManager.persist(aluno);
 
-		logger.info(bundle.getString("cadastro.aluno.sucesso", aluno.getNome()));
+		logger.info(bundle.getString("matricula.sucesso", aluno.getNome()));
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
