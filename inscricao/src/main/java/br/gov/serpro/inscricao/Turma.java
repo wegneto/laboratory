@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.stereotype.Controller;
+import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 @Controller
@@ -31,6 +32,7 @@ public class Turma {
 		throw exception;
 	}
 
+	@Transactional
 	public void matricular(Aluno aluno) {
 		Query query = entityManager.createQuery("select count(this) from Aluno this");
 		Long qtdAlunosMatriculados = (Long) query.getSingleResult();
@@ -39,9 +41,7 @@ public class Turma {
 			throw new TurmaException();
 		}
 
-		entityManager.getTransaction().begin();
 		entityManager.persist(aluno);
-		entityManager.getTransaction().commit();
 
 		logger.info(messages.getString("cadastro.aluno.sucesso", aluno.getNome()));
 	}
