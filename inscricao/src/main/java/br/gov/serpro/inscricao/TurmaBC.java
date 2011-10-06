@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
+import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
@@ -34,6 +35,7 @@ public class TurmaBC extends DelegateCrud<Turma, Integer, TurmaDAO>{
 	}
 
 	@Transactional
+	@RequiredPermission(resource="turma", operation="matricular")
 	public void matricular(Aluno aluno, Turma turma) {
 		int qtdAlunosMatriculados = alunoBC.findByTurma(turma).size();
 
@@ -55,5 +57,5 @@ public class TurmaBC extends DelegateCrud<Turma, Integer, TurmaDAO>{
 	public boolean estaMatriculado(Aluno aluno, Turma turma) {
 		return alunoBC.findByNomeTurma(aluno.getNome(), turma).size() > 0;
 	}
-
+	
 }
