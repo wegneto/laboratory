@@ -16,7 +16,7 @@ public class TurmaTest {
 	private Turma turma;
 	
 	@Test
-	public void cadastrarComSucesso() {
+	public void matricularAlunoComSucesso() {
 		
 		String aluno = "Aluno 1";
 		
@@ -27,7 +27,7 @@ public class TurmaTest {
 	}
 	
 	@Test
-	public void falhaAoCadastrarDuplicado() {
+	public void falhaAoTentarMatricularAlunoDuplicado() {
 		String aluno = "Aluno 1";
 		
 		turma.matricular(aluno);
@@ -41,7 +41,7 @@ public class TurmaTest {
 	}
 	
 	@Test
-	public void falhaAoCadastrarAcimaDoLimite() {
+	public void falhaAoTentarMatricularAlunoNaTurmaCheia() {
 		turma.matricular("Aluno 1");
 		turma.matricular("Aluno 2");
 		turma.matricular("Aluno 3");
