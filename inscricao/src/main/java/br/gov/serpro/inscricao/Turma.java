@@ -18,8 +18,8 @@ public class Turma {
 	private Logger logger;
 
 	@Inject
-	private ResourceBundle messages;
-
+	private ResourceBundle bundle;
+	
 	@Inject
 	private InscricaoConfig config;
 
@@ -43,7 +43,7 @@ public class Turma {
 
 		entityManager.persist(aluno);
 
-		logger.info(messages.getString("cadastro.aluno.sucesso", aluno.getNome()));
+		logger.info(bundle.getString("cadastro.aluno.sucesso", aluno.getNome()));
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
