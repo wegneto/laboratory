@@ -50,8 +50,6 @@ public class TurmaTest {
 	public void falhaAoTentarMatricularAlunoDuplicado() {
 		turma.matricular(new Aluno("Aluno 1"));
 		turma.matricular(new Aluno("Aluno 1"));
-
-		Assert.fail();
 	}
 
 	@Test(expected = TurmaException.class)
@@ -61,7 +59,6 @@ public class TurmaTest {
 		}
 
 		turma.matricular(new Aluno("Aluno 6"));
-		Assert.fail();
 	}
 
 }
