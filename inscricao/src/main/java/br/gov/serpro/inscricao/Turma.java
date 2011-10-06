@@ -6,8 +6,11 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
+import br.gov.frameworkdemoiselle.stereotype.Controller;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
+@Controller
 public class Turma {
 
 	@Inject
@@ -17,6 +20,12 @@ public class Turma {
 	private ResourceBundle messages;
 	
 	private ArrayList<String> alunos = new ArrayList<String>();
+	
+	@ExceptionHandler
+	public void tratarExcecao(RuntimeException exception) {
+		logger.warn("Ocorreu um erro ao matricular aluno.");
+		throw exception;
+	}
 
 	public void matricular(String aluno) {
 		if (estaMatriculado(aluno) || alunos.size() >= 5) {
