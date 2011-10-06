@@ -3,6 +3,7 @@ package br.gov.serpro.inscricao;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Aluno {
@@ -12,6 +13,17 @@ public class Aluno {
 	private Integer matricula;
 
 	private String nome;
+
+	@ManyToOne
+	private Turma turma;
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 
 	public Aluno() {
 
