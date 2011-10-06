@@ -1,5 +1,8 @@
 package br.gov.serpro.inscricao;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class InscricaoCredential {
 
 	private String login;

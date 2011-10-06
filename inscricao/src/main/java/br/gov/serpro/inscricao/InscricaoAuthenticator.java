@@ -29,7 +29,26 @@ public class InscricaoAuthenticator implements Authenticator {
 	@Override
 	public User getUser() {
 		// TODO Auto-generated method stub
-		return null;
+		return new User() {
+			
+			@Override
+			public String getId() {
+				return credential.getLogin();
+			}
+			
+			@Override
+			public void setAttribute(Object key, Object value) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+			@Override
+			public Object getAttribute(Object key) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
 	}
 
 	@Override
