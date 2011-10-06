@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

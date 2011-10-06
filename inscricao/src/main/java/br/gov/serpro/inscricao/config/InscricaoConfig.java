@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.config;
 
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;

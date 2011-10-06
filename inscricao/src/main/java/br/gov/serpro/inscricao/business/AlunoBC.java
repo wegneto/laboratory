@@ -1,9 +1,12 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.business;
 
 import java.util.List;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.gov.serpro.inscricao.domain.Aluno;
+import br.gov.serpro.inscricao.domain.Turma;
+import br.gov.serpro.inscricao.persistence.AlunoDAO;
 
 @BusinessController
 public class AlunoBC extends DelegateCrud<Aluno, Integer, AlunoDAO> {

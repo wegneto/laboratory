@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.exception;
 
 import br.gov.frameworkdemoiselle.exception.ApplicationException;
 

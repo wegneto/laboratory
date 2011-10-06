@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.business;
 
 import javax.inject.Inject;
 
@@ -10,6 +10,11 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
+import br.gov.serpro.inscricao.config.InscricaoConfig;
+import br.gov.serpro.inscricao.domain.Aluno;
+import br.gov.serpro.inscricao.domain.Turma;
+import br.gov.serpro.inscricao.exception.TurmaException;
+import br.gov.serpro.inscricao.persistence.TurmaDAO;
 
 @BusinessController
 public class TurmaBC extends DelegateCrud<Turma, Integer, TurmaDAO>{
@@ -29,9 +34,9 @@ public class TurmaBC extends DelegateCrud<Turma, Integer, TurmaDAO>{
 	private AlunoBC alunoBC;
 
 	@ExceptionHandler
-	public void tratarExcecao(TurmaException exception) {
+	public void tratar(TurmaException e) {
 		logger.warn("Ocorreu um erro ao matricular aluno.");
-		throw exception;
+		throw e;
 	}
 
 	@Transactional

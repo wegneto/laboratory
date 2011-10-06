@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.security;
 
 import javax.enterprise.context.ApplicationScoped;
 

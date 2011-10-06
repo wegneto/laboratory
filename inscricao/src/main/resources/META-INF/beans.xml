@@ -3,7 +3,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_1.xsd">
  <alternatives>
   <class>br.gov.frameworkdemoiselle.transaction.JPATransaction</class>
-  <class>br.gov.serpro.inscricao.InscricaoAuthenticator</class>
-  <class>br.gov.serpro.inscricao.InscricaoAuthorizer</class>
+  <class>br.gov.serpro.inscricao.security.InscricaoAuthenticator</class>
+  <class>br.gov.serpro.inscricao.security.InscricaoAuthorizer</class>
  </alternatives>
 </beans>

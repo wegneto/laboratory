@@ -12,6 +12,12 @@ import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 import br.gov.frameworkdemoiselle.security.SecurityContext;
+import br.gov.serpro.inscricao.business.AlunoBC;
+import br.gov.serpro.inscricao.business.TurmaBC;
+import br.gov.serpro.inscricao.domain.Aluno;
+import br.gov.serpro.inscricao.domain.Turma;
+import br.gov.serpro.inscricao.exception.TurmaException;
+import br.gov.serpro.inscricao.security.InscricaoCredential;
 
 @RunWith(DemoiselleRunner.class)
 public class TurmaTest {

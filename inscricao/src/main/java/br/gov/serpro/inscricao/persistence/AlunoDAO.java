@@ -1,4 +1,4 @@
-package br.gov.serpro.inscricao;
+package br.gov.serpro.inscricao.persistence;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
+import br.gov.serpro.inscricao.domain.Aluno;
+import br.gov.serpro.inscricao.domain.Turma;
 
 @PersistenceController
 public class AlunoDAO extends JPACrud<Aluno, Integer> {
