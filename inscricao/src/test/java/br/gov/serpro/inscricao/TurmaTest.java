@@ -16,13 +16,13 @@ import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
 @RunWith(DemoiselleRunner.class)
 public class TurmaTest {
-	
+
 	@Inject
 	private TurmaBC turma;
-	
+
 	@Inject
 	private EntityManager entityManager;
-	
+
 	@Before
 	public void setUp() {
 		final String jpql = "select this from " + Aluno.class.getSimpleName() + " this";
@@ -31,45 +31,37 @@ public class TurmaTest {
 		List<Aluno> lista = query.getResultList();
 
 		entityManager.getTransaction().begin();
-		
+
 		for (Aluno aluno : lista) {
 			entityManager.remove(aluno);
 		}
-		
+
 		entityManager.getTransaction().commit();
 	}
-	
+
 	@Test
 	public void matricularAlunoComSucesso() {
 		Aluno aluno = new Aluno("Aluno 1");
 		turma.matricular(aluno);
 		Assert.assertTrue(turma.estaMatriculado(aluno));
 	}
-	
-	@Test
+
+	@Test(expected = TurmaException.class)
 	public void falhaAoTentarMatricularAlunoDuplicado() {
-		turma.matricular(new Aluno("Aluno 2"));
-		
-		try {
-			turma.matricular(new Aluno("Aluno 2"));
-			Assert.fail();
-		} catch (TurmaException e) {
-		}
+		turma.matricular(new Aluno("Aluno 1"));
+		turma.matricular(new Aluno("Aluno 1"));
+
+		Assert.fail();
 	}
-	
-	@Test
+
+	@Test(expected = TurmaException.class)
 	public void falhaAoTentarMatricularAlunoNaTurmaCheia() {
-		turma.matricular(new Aluno("Aluno 3"));
-		turma.matricular(new Aluno("Aluno 4"));
-		turma.matricular(new Aluno("Aluno 5"));
-		turma.matricular(new Aluno("Aluno 6"));
-		turma.matricular(new Aluno("Aluno 7"));
-		
-		try {
-			turma.matricular(new Aluno("Aluno 8"));
-			Assert.fail();
-		} catch (TurmaException e) {
+		for (int i = 1; i <= 5; i++) {
+			turma.matricular(new Aluno("Aluno " + i));
 		}
+
+		turma.matricular(new Aluno("Aluno 5"));
+		Assert.fail();
 	}
 
 }

@@ -7,11 +7,11 @@ import javax.persistence.Query;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
-import br.gov.frameworkdemoiselle.stereotype.Controller;
+import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
-@Controller
+@BusinessController
 public class TurmaBC {
 
 	@Inject
@@ -19,12 +19,12 @@ public class TurmaBC {
 
 	@Inject
 	private ResourceBundle bundle;
-	
+
 	@Inject
 	private InscricaoConfig config;
 
 	@Inject
-	private EntityManager entityManager;
+	private TurmaDAO dao;
 
 	@ExceptionHandler
 	public void tratarExcecao(TurmaException exception) {
@@ -34,24 +34,19 @@ public class TurmaBC {
 
 	@Transactional
 	public void matricular(Aluno aluno) {
-		Query query = entityManager.createQuery("select count(this) from Aluno this");
-		Long qtdAlunosMatriculados = (Long) query.getSingleResult();
+		int qtdAlunosMatriculados = dao.findAll().size();
 
-		if (estaMatriculado(aluno) || qtdAlunosMatriculados >= config.getCapTurma()) {
+		if (estaMatriculado(aluno) || qtdAlunosMatriculados == config.getLimiteTurma()) {
 			throw new TurmaException();
 		}
 
-		entityManager.persist(aluno);
+		dao.inserir(aluno);
 
 		logger.info(bundle.getString("matricula.sucesso", aluno.getNome()));
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
-		String jpql = "select this from Aluno this where this.nome = :nome";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("nome", aluno.getNome());
-
-		return query.getResultList().size() > 0;
+		return dao.findByNome(aluno.getNome()).size() > 0;
 	}
 
 }

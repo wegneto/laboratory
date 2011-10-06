@@ -7,14 +7,14 @@ import br.gov.frameworkdemoiselle.configuration.Configuration;
 public class InscricaoConfig {
 
 	@Name("capacidade.turma")
-	private int capTurma = 5;
+	private int limiteTurma = 5;
 
-	public int getCapTurma() {
-		return capTurma;
+	public int getLimiteTurma() {
+		return limiteTurma;
 	}
 
-	public void setCapTurma(int capTurma) {
-		this.capTurma = capTurma;
+	public void setLimiteTurma(int limiteTurma) {
+		this.limiteTurma = limiteTurma;
 	}
 
 }
