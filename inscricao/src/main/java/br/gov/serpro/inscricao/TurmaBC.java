@@ -1,8 +1,6 @@
 package br.gov.serpro.inscricao;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.slf4j.Logger;
 
@@ -26,6 +24,9 @@ public class TurmaBC {
 	@Inject
 	private TurmaDAO dao;
 
+	@Inject
+	private AlunoBC alunoBC;
+
 	@ExceptionHandler
 	public void tratarExcecao(TurmaException exception) {
 		logger.warn("Ocorreu um erro ao matricular aluno.");
@@ -33,20 +34,26 @@ public class TurmaBC {
 	}
 
 	@Transactional
-	public void matricular(Aluno aluno) {
-		int qtdAlunosMatriculados = dao.findAll().size();
+	public void matricular(Aluno aluno, Turma turma) {
+		int qtdAlunosMatriculados = alunoBC.findByTurma(turma).size();
 
-		if (estaMatriculado(aluno) || qtdAlunosMatriculados == config.getLimiteTurma()) {
+		if (estaMatriculado(aluno, turma) || qtdAlunosMatriculados == config.getLimiteTurma()) {
 			throw new TurmaException();
 		}
 
-		dao.inserir(aluno);
+		alunoBC.insert(aluno);
+		if (turma.getId() == null) {
+			dao.inserir(turma);
+		}
+
+		aluno.setTurma(turma);
+		alunoBC.update(aluno);
 
 		logger.info(bundle.getString("matricula.sucesso", aluno.getNome()));
 	}
 
-	public boolean estaMatriculado(Aluno aluno) {
-		return dao.findByNome(aluno.getNome()).size() > 0;
+	public boolean estaMatriculado(Aluno aluno, Turma turma) {
+		return alunoBC.findByNomeTurma(aluno.getNome(), turma).size() > 0;
 	}
 
 }

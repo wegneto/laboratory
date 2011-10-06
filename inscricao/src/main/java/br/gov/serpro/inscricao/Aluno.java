@@ -14,8 +14,7 @@ public class Aluno {
 
 	private String nome;
 
-	@ManyToOne
-	private Turma turma;
+	@ManyToOne	private Turma turma;
 
 	public Turma getTurma() {
 		return turma;

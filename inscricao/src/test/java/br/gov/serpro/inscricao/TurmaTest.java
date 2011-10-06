@@ -18,22 +18,30 @@ import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 public class TurmaTest {
 
 	@Inject
-	private TurmaBC turma;
+	private TurmaBC turmaBC;
 
 	@Inject
 	private EntityManager entityManager;
 
+	@Inject
+	private AlunoBC alunoBC;
+
 	@Before
 	public void setUp() {
-		final String jpql = "select this from " + Aluno.class.getSimpleName() + " this";
+		List<Aluno> listaAlunos = alunoBC.findAll();
+		for (Aluno aluno : listaAlunos) {
+			alunoBC.delete(aluno.getMatricula());
+		}
+
+		final String jpql = "select this from " + Turma.class.getSimpleName() + " this";
 		final Query query = entityManager.createQuery(jpql);
 
-		List<Aluno> lista = query.getResultList();
+		List<Turma> listaTurmas = query.getResultList();
 
 		entityManager.getTransaction().begin();
 
-		for (Aluno aluno : lista) {
-			entityManager.remove(aluno);
+		for (Turma turma : listaTurmas) {
+			entityManager.remove(turma);
 		}
 
 		entityManager.getTransaction().commit();
@@ -41,24 +49,28 @@ public class TurmaTest {
 
 	@Test
 	public void matricularAlunoComSucesso() {
+		Turma turma = new Turma("Turma 1");
 		Aluno aluno = new Aluno("Aluno 1");
-		turma.matricular(aluno);
-		Assert.assertTrue(turma.estaMatriculado(aluno));
+		turmaBC.matricular(aluno, turma);
+		Assert.assertTrue(turmaBC.estaMatriculado(aluno, turma));
 	}
 
 	@Test(expected = TurmaException.class)
 	public void falhaAoTentarMatricularAlunoDuplicado() {
-		turma.matricular(new Aluno("Aluno 1"));
-		turma.matricular(new Aluno("Aluno 1"));
+		Turma turma = new Turma("Turma 1");
+		turmaBC.matricular(new Aluno("Aluno 1"), turma);
+		turmaBC.matricular(new Aluno("Aluno 1"), turma);
 	}
 
 	@Test(expected = TurmaException.class)
 	public void falhaAoTentarMatricularAlunoNaTurmaCheia() {
+		Turma turma = new Turma("Turma 1");
+
 		for (int i = 1; i <= 5; i++) {
-			turma.matricular(new Aluno("Aluno " + i));
+			turmaBC.matricular(new Aluno("Aluno " + i), turma);
 		}
 
-		turma.matricular(new Aluno("Aluno 6"));
+		turmaBC.matricular(new Aluno("Aluno 6"), turma);
 	}
 
 }

@@ -13,6 +13,14 @@ public class Turma {
 
 	private String nome;
 
+	public Turma() {
+
+	}
+
+	public Turma(String nome) {
+		this.nome = nome;
+	}
+
 	public Integer getId() {
 		return id;
 	}

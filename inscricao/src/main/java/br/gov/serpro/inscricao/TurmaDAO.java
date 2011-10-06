@@ -16,8 +16,8 @@ public class TurmaDAO {
 	private EntityManager entityManager;
 
 	@Transactional
-	public void inserir(Aluno aluno) {
-		entityManager.persist(aluno);
+	public void inserir(Turma turma) {
+		entityManager.persist(turma);
 	}
 	
 	public List<Aluno> findAll() {
@@ -25,13 +25,6 @@ public class TurmaDAO {
 
 		return query.getResultList();
 	}
-	
-	public List<Aluno> findByNome(String nome) {
-		String jpql = "select this from Aluno this where this.nome = :nome";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("nome", nome);
-
-		return query.getResultList();
-	}
 
 }
+
