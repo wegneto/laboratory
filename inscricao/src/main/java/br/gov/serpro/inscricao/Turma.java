@@ -22,7 +22,7 @@ public class Turma {
 	@Inject
 	private InscricaoConfig config;
 	
-	private ArrayList<String> alunos = new ArrayList<String>();
+	private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
 	
 	@ExceptionHandler
 	public void tratarExcecao(TurmaException exception) {
@@ -30,7 +30,7 @@ public class Turma {
 		throw exception;
 	}
 
-	public void matricular(String aluno) {
+	public void matricular(Aluno aluno) {
 		if (estaMatriculado(aluno) || alunos.size() >= config.getCapTurma()) {
 			throw new TurmaException();
 		}
@@ -38,7 +38,7 @@ public class Turma {
 		logger.info(messages.getString("cadastro.aluno.sucesso", aluno));
 	}
 
-	public boolean estaMatriculado(String aluno) {
+	public boolean estaMatriculado(Aluno aluno) {
 		if (alunos.contains(aluno)) {
 			return true;
 		}

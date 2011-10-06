@@ -17,23 +17,20 @@ public class TurmaTest {
 	
 	@Test
 	public void matricularAlunoComSucesso() {
-		
-		String aluno = "Aluno 1";
+		Aluno aluno = new Aluno("Aluno 1", 123);
 		
 		turma.matricular(aluno);
 		
 		Assert.assertTrue(turma.estaMatriculado(aluno));
-		
 	}
 	
 	@Test
 	public void falhaAoTentarMatricularAlunoDuplicado() {
-		String aluno = "Aluno 1";
 		
-		turma.matricular(aluno);
+		turma.matricular(new Aluno("Aluno 1", 123));
 		
 		try {
-			turma.matricular(aluno);
+			turma.matricular(new Aluno("Aluno 1", 123));
 			Assert.fail();
 		} catch (TurmaException e) {
 		}
@@ -42,14 +39,14 @@ public class TurmaTest {
 	
 	@Test
 	public void falhaAoTentarMatricularAlunoNaTurmaCheia() {
-		turma.matricular("Aluno 1");
-		turma.matricular("Aluno 2");
-		turma.matricular("Aluno 3");
-		turma.matricular("Aluno 4");
-		turma.matricular("Aluno 5");
+		turma.matricular(new Aluno("Aluno 1", 123));
+		turma.matricular(new Aluno("Aluno 2", 124));
+		turma.matricular(new Aluno("Aluno 3", 125));
+		turma.matricular(new Aluno("Aluno 4", 126));
+		turma.matricular(new Aluno("Aluno 5", 127));
 		
 		try {
-			turma.matricular("Aluno 6");
+			turma.matricular(new Aluno("Aluno 6", 128));
 			Assert.fail();
 		} catch (TurmaException e) {
 		}
