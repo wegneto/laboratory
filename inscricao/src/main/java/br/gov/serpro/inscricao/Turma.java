@@ -22,14 +22,14 @@ public class Turma {
 	private ArrayList<String> alunos = new ArrayList<String>();
 	
 	@ExceptionHandler
-	public void tratarExcecao(RuntimeException exception) {
+	public void tratarExcecao(TurmaException exception) {
 		logger.warn("Ocorreu um erro ao matricular aluno.");
 		throw exception;
 	}
 
 	public void matricular(String aluno) {
 		if (estaMatriculado(aluno) || alunos.size() >= 5) {
-			throw new RuntimeException();
+			throw new TurmaException();
 		}
 		alunos.add(aluno);
 		logger.info(messages.getString("cadastro.aluno.sucesso", aluno));

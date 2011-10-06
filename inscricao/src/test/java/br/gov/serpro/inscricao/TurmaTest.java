@@ -35,7 +35,7 @@ public class TurmaTest {
 		try {
 			turma.matricular(aluno);
 			Assert.fail();
-		} catch (RuntimeException e) {
+		} catch (TurmaException e) {
 		}
 		
 	}
@@ -51,7 +51,7 @@ public class TurmaTest {
 		try {
 			turma.matricular("Aluno 6");
 			Assert.fail();
-		} catch (RuntimeException e) {
+		} catch (TurmaException e) {
 		}
 		
 	}
