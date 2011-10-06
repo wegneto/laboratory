@@ -1,6 +1,7 @@
 package br.gov.serpro.inscricao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class Turma {
 	@Inject
 	private InscricaoConfig config;
 	
-	private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+	private List<Aluno> alunosMatriculados = new ArrayList<Aluno>();
 	
 	@ExceptionHandler
 	public void tratarExcecao(TurmaException exception) {
@@ -31,15 +32,15 @@ public class Turma {
 	}
 
 	public void matricular(Aluno aluno) {
-		if (estaMatriculado(aluno) || alunos.size() >= config.getCapTurma()) {
+		if (estaMatriculado(aluno) || alunosMatriculados.size() >= config.getCapTurma()) {
 			throw new TurmaException();
 		}
-		alunos.add(aluno);
+		alunosMatriculados.add(aluno);
 		logger.info(messages.getString("cadastro.aluno.sucesso", aluno));
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
-		if (alunos.contains(aluno)) {
+		if (alunosMatriculados.contains(aluno)) {
 			return true;
 		}
 		return false;
