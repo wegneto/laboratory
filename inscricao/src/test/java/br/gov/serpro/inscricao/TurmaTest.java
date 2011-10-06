@@ -3,8 +3,6 @@ package br.gov.serpro.inscricao;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import junit.framework.Assert;
 
@@ -21,9 +19,6 @@ public class TurmaTest {
 	private TurmaBC turmaBC;
 
 	@Inject
-	private EntityManager entityManager;
-
-	@Inject
 	private AlunoBC alunoBC;
 
 	@Before
@@ -32,19 +27,11 @@ public class TurmaTest {
 		for (Aluno aluno : listaAlunos) {
 			alunoBC.delete(aluno.getMatricula());
 		}
-
-		final String jpql = "select this from " + Turma.class.getSimpleName() + " this";
-		final Query query = entityManager.createQuery(jpql);
-
-		List<Turma> listaTurmas = query.getResultList();
-
-		entityManager.getTransaction().begin();
-
+		
+		List<Turma> listaTurmas = turmaBC.findAll();
 		for (Turma turma : listaTurmas) {
-			entityManager.remove(turma);
+			turmaBC.delete(turma.getId());
 		}
-
-		entityManager.getTransaction().commit();
 	}
 
 	@Test

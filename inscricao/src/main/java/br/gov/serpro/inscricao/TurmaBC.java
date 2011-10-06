@@ -6,11 +6,14 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
+import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 @BusinessController
-public class TurmaBC {
+public class TurmaBC extends DelegateCrud<Turma, Integer, TurmaDAO>{
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private Logger logger;
@@ -20,9 +23,6 @@ public class TurmaBC {
 
 	@Inject
 	private InscricaoConfig config;
-
-	@Inject
-	private TurmaDAO dao;
 
 	@Inject
 	private AlunoBC alunoBC;
@@ -43,7 +43,7 @@ public class TurmaBC {
 
 		alunoBC.insert(aluno);
 		if (turma.getId() == null) {
-			dao.inserir(turma);
+			getDelegate().insert(turma);
 		}
 
 		aluno.setTurma(turma);

@@ -1,30 +1,11 @@
 package br.gov.serpro.inscricao;
 
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.transaction.Transactional;
+import br.gov.frameworkdemoiselle.template.JPACrud;
 
 @PersistenceController
-public class TurmaDAO {
+public class TurmaDAO extends JPACrud<Turma, Integer> {
 
-	@Inject
-	private EntityManager entityManager;
-
-	@Transactional
-	public void inserir(Turma turma) {
-		entityManager.persist(turma);
-	}
-	
-	public List<Aluno> findAll() {
-		Query query = entityManager.createQuery("select this from Aluno this");
-
-		return query.getResultList();
-	}
+	private static final long serialVersionUID = 1L;
 
 }
-
