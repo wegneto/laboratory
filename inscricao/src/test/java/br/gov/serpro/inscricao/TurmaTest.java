@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
+import br.gov.frameworkdemoiselle.security.SecurityContext;
 
 @RunWith(DemoiselleRunner.class)
 public class TurmaTest {
@@ -20,9 +21,20 @@ public class TurmaTest {
 
 	@Inject
 	private AlunoBC alunoBC;
+	
+	@Inject
+	private SecurityContext securityContext;
+	
+	@Inject
+	private InscricaoCredential credential;
 
 	@Before
 	public void setUp() {
+		
+		credential.setLogin("creuza");
+		credential.setPassword("amor");
+		securityContext.login();
+		
 		List<Aluno> listaAlunos = alunoBC.findAll();
 		for (Aluno aluno : listaAlunos) {
 			alunoBC.delete(aluno.getMatricula());
