@@ -19,6 +19,9 @@ public class Turma {
 	@Inject
 	private ResourceBundle messages;
 	
+	@Inject
+	private InscricaoConfig config;
+	
 	private ArrayList<String> alunos = new ArrayList<String>();
 	
 	@ExceptionHandler
@@ -28,7 +31,7 @@ public class Turma {
 	}
 
 	public void matricular(String aluno) {
-		if (estaMatriculado(aluno) || alunos.size() >= 5) {
+		if (estaMatriculado(aluno) || alunos.size() >= config.getCapTurma()) {
 			throw new TurmaException();
 		}
 		alunos.add(aluno);
