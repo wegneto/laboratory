@@ -1,9 +1,8 @@
 package br.gov.serpro.inscricao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 
@@ -16,15 +15,16 @@ public class Turma {
 
 	@Inject
 	private Logger logger;
-	
+
 	@Inject
 	private ResourceBundle messages;
-	
+
 	@Inject
 	private InscricaoConfig config;
-	
-	private List<Aluno> alunosMatriculados = new ArrayList<Aluno>();
-	
+
+	@Inject
+	private EntityManager entityManager;
+
 	@ExceptionHandler
 	public void tratarExcecao(TurmaException exception) {
 		logger.warn("Ocorreu um erro ao matricular aluno.");
@@ -32,18 +32,26 @@ public class Turma {
 	}
 
 	public void matricular(Aluno aluno) {
-		if (estaMatriculado(aluno) || alunosMatriculados.size() >= config.getCapTurma()) {
+		Query query = entityManager.createQuery("select count(this) from Aluno this");
+		Long qtdAlunosMatriculados = (Long) query.getSingleResult();
+
+		if (estaMatriculado(aluno) || qtdAlunosMatriculados >= config.getCapTurma()) {
 			throw new TurmaException();
 		}
-		alunosMatriculados.add(aluno);
-		logger.info(messages.getString("cadastro.aluno.sucesso", aluno));
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(aluno);
+		entityManager.getTransaction().commit();
+
+		logger.info(messages.getString("cadastro.aluno.sucesso", aluno.getNome()));
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
-		if (alunosMatriculados.contains(aluno)) {
-			return true;
-		}
-		return false;
+		String jpql = "select this from Aluno this where this.nome = :nome";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("nome", aluno.getNome());
+
+		return query.getResultList().size() > 0;
 	}
 
 }

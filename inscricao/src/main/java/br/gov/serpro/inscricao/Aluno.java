@@ -17,9 +17,8 @@ public class Aluno {
 
 	}
 
-	public Aluno(String nome, Integer matricula) {
+	public Aluno(String nome) {
 		this.nome = nome;
-		this.matricula = matricula;
 	}
 
 	public String getNome() {
