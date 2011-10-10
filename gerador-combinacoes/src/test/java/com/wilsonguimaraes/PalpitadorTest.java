@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,14 +29,14 @@ public class PalpitadorTest {
 	
 	@Test
 	public void testNomeGrande() {
-		int qtdCaract = palpitador.getNumerologia("Pedro de Alcântara João Carlos Leopoldo Salvador Bibiano Francisco Xavier de Paula Leocádio Miguel Gabriel Rafael Gonzaga");
+		int qtdCaract = palpitador.getNumerologia("Pedro de Alcantara Joao Carlos Leopoldo Salvador Bibiano Francisco Xavier de Paula Leocadio Miguel Gabriel Rafael Gonzaga");
 		Assert.assertEquals(qtdCaract, 6);
 	}
 	
 	@Test
 	public void testLetrasENumeros() {
 		int qtdCaract = palpitador.getNumerologia("123teste456");
-		Assert.assertEquals(qtdCaract, 2);
+		Assert.assertEquals(qtdCaract, 8);
 	}
 	
 	@Test
@@ -83,7 +82,6 @@ public class PalpitadorTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testCPFFormatado() {
 		int qtdCaract = palpitador.getNumerologia("123.456.789-01");
 		Assert.assertEquals(qtdCaract, 1);

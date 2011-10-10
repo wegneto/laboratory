@@ -1,14 +1,12 @@
 package com.wilsonguimaraes;
 
-import java.util.regex.Pattern;
-
 import javax.enterprise.event.Observes;
 
 import org.jboss.weld.environment.se.StartMain;
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
 public class Palpitador {
-
+	
 	private int calcular(String valor) {
 		int soma = 0;
 
@@ -24,14 +22,19 @@ public class Palpitador {
 	}
 
 	public int getNumerologia(String string) {
-		String valor = string.replaceAll(" ", "");
-		Pattern p = Pattern.compile("\\D");
-
-		if (p.matcher(valor).find()) {
-			valor = Integer.toString(valor.length());
+		int total = 0;
+		
+		for (int i = 0; i < string.length(); i++) {
+			String caractere = string.substring(i, i + 1);
+			
+			if (caractere.matches("[0-9]")) {
+				total += Integer.valueOf(caractere);
+			} else if (caractere.matches("[a-zA-Z]")) {
+				total++;
+			}
 		}
-
-		return calcular(valor);
+		
+		return calcular(Integer.toString(total));
 	}
 
 	public void start(@Observes ContainerInitialized event) {
