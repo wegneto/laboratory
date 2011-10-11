@@ -11,24 +11,12 @@ public class Autorizador implements Authorizer {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
-	private SecurityContext securityContext;
-
-	@Override
-	public boolean hasPermission(String arg0, String arg1) {
-		boolean hasPermission = false;
-		
-		if (securityContext.getUser().getId().equals("creuza")) {
-			hasPermission = true;
-		}
-		
-		return hasPermission;
+	public boolean hasRole(String role) {
+		return true;
 	}
 
-	@Override
-	public boolean hasRole(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasPermission(String resource, String operation) {
+		return true;
 	}
 
 }

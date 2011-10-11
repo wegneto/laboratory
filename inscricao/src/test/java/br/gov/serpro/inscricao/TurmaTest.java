@@ -1,7 +1,5 @@
 package br.gov.serpro.inscricao;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import junit.framework.Assert;
@@ -15,7 +13,7 @@ import br.gov.frameworkdemoiselle.security.SecurityContext;
 import br.gov.serpro.inscricao.business.TurmaBC;
 import br.gov.serpro.inscricao.entity.Aluno;
 import br.gov.serpro.inscricao.exception.TurmaException;
-import br.gov.serpro.inscricao.security.InscricaoCredential;
+import br.gov.serpro.inscricao.security.Credenciais;
 
 @RunWith(DemoiselleRunner.class)
 public class TurmaTest {
@@ -27,12 +25,12 @@ public class TurmaTest {
 	private SecurityContext securityContext;
 
 	@Inject
-	private InscricaoCredential credential;
+	private Credenciais credential;
 
 	@Before
 	public void setUp() {
-		credential.setLogin("creuza");
-		credential.setPassword("amor");
+		credential.setNome("creuza");
+		credential.setSenha("amor");
 		securityContext.login();
 	}
 
