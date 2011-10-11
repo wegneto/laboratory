@@ -4,8 +4,7 @@
 
 	<persistence-unit name="inscricao-ds" transaction-type="RESOURCE_LOCAL">
 
-		<class>br.gov.serpro.inscricao.domain.Aluno</class>
-		<class>br.gov.serpro.inscricao.domain.Turma</class>
+		<class>br.gov.serpro.inscricao.entity.Aluno</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
