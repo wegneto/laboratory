@@ -3,11 +3,7 @@ package com.wilsonguimaraes;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-
-import org.jboss.weld.environment.se.StartMain;
-import org.jboss.weld.environment.se.events.ContainerInitialized;
 
 import com.wilsonguimaraes.config.GeradorConfig;
 
@@ -18,15 +14,7 @@ public class Gerador {
 	
 	private ArrayList<TreeSet<Integer>> volantesGerados = new ArrayList<TreeSet<Integer>>();
 
-	public void start(@Observes ContainerInitialized event) {
-		gerarVolantes(10);
-	}
-
-	public static void main(String[] args) {
-		new StartMain(args).go();
-	}
-	
-	private void gerarVolantes(int qtdVolantes) {
+	public void gerarVolantes(int qtdVolantes) {
 		ArrayList<Integer> dezenasUtilizadas = new ArrayList<Integer>();
 
 		for (int i = 0; i < qtdVolantes; i++) {
