@@ -25,12 +25,12 @@ public class TurmaTest {
 	private SecurityContext securityContext;
 
 	@Inject
-	private Credenciais credential;
+	private Credenciais credenciais;
 
 	@Before
 	public void setUp() {
-		credential.setNome("creuza");
-		credential.setSenha("amor");
+		credenciais.setNome("secretaria");
+		credenciais.setSenha("segredo");
 		securityContext.login();
 	}
 

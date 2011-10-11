@@ -1,9 +1,11 @@
 package br.gov.serpro.inscricao.security;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
 
-@ApplicationScoped
-public class Credenciais {
+import javax.enterprise.context.SessionScoped;
+
+@SessionScoped
+public class Credenciais implements Serializable {
 
 	private String nome;
 
