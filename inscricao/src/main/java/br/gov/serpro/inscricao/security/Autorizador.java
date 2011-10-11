@@ -7,7 +7,7 @@ import br.gov.frameworkdemoiselle.security.Authorizer;
 import br.gov.frameworkdemoiselle.security.SecurityContext;
 
 @Alternative
-public class InscricaoAuthorizer implements Authorizer {
+public class Autorizador implements Authorizer {
 
 	private static final long serialVersionUID = 1L;
 	
