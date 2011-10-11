@@ -17,7 +17,7 @@ public class Autenticador implements Authenticator {
 	@Override
 	public boolean authenticate() {
 		boolean autenticated = false;
-		
+
 		if ((credential.getLogin().equals("creuza") && credential.getPassword().equals("amor"))
 				&& (credential.getLogin().equals("creuza") && credential.getPassword().equals("amor"))) {
 			autenticated = true;
@@ -30,19 +30,18 @@ public class Autenticador implements Authenticator {
 	public User getUser() {
 		// TODO Auto-generated method stub
 		return new User() {
-			
+
 			@Override
 			public String getId() {
 				return credential.getLogin();
 			}
-			
+
 			@Override
 			public void setAttribute(Object key, Object value) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
-			
+
 			@Override
 			public Object getAttribute(Object key) {
 				// TODO Auto-generated method stub

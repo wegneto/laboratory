@@ -31,12 +31,6 @@ public class TurmaBC {
 	@Inject
 	private AlunoBC alunoBC;
 
-	@ExceptionHandler
-	public void tratar(TurmaException e) {
-		logger.warn(bundle.getString("matricula.erro"));
-		throw e;
-	}
-
 	@Transactional
 	@RequiredPermission(resource = "turma", operation = "matricular")
 	public void matricular(Aluno aluno) {
@@ -56,10 +50,16 @@ public class TurmaBC {
 	private List<Aluno> obterAlunosMatriculados() {
 		return alunoBC.findAll();
 	}
+	
+	@ExceptionHandler
+	public void tratar(TurmaException e) {
+		logger.warn(bundle.getString("matricula.erro"));
+		throw e;
+	}
 
 	@Startup
-	public void iniciar() {
-		logger.info("O sistema de inscrições está no ar.");
+	public void iniciar(){
+		logger.info("Iniciando ...");
 	}
 	
 }
