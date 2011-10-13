@@ -47,7 +47,7 @@ public class TurmaBC {
 		return obterAlunosMatriculados().contains(aluno);
 	}
 
-	private List<Aluno> obterAlunosMatriculados() {
+	public List<Aluno> obterAlunosMatriculados() {
 		return alunoBC.findAll();
 	}
 	
