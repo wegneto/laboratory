@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
+import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
@@ -31,6 +32,9 @@ public class TurmaBC {
 	@Inject
 	private AlunoBC alunoBC;
 
+	@Inject
+	private MessageContext messageContext;
+
 	@Transactional
 	@RequiredPermission(resource = "turma", operation = "matricular")
 	public void matricular(Aluno aluno) {
@@ -39,7 +43,10 @@ public class TurmaBC {
 		}
 
 		alunoBC.insert(aluno);
-		logger.info(bundle.getString("matricula.sucesso", aluno.getNome()));
+		
+		String mensagem = bundle.getString("matricula.sucesso", aluno.getNome()); 
+		logger.info(mensagem);
+		messageContext.add(mensagem);
 	}
 
 	@RequiredPermission(resource = "turma", operation = "consultar")
@@ -50,7 +57,7 @@ public class TurmaBC {
 	public List<Aluno> obterAlunosMatriculados() {
 		return alunoBC.findAll();
 	}
-	
+
 	@ExceptionHandler
 	public void tratar(TurmaException e) {
 		logger.warn(bundle.getString("matricula.erro"));
@@ -58,8 +65,8 @@ public class TurmaBC {
 	}
 
 	@Startup
-	public void iniciar(){
+	public void iniciar() {
 		logger.info("Iniciando ...");
 	}
-	
+
 }
