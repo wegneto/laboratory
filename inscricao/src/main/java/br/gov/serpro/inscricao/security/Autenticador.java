@@ -14,13 +14,7 @@ public class Autenticador implements Authenticator {
 
 	@Override
 	public boolean authenticate() {
-		boolean autenticado = false;
-		
-		if (credenciais.getNome().equals("secretaria") && credenciais.getSenha().equals("123456")) {
-			autenticado = true;
-		}
-		
-		return autenticado;
+		return (credenciais.getNome().equals("secretaria") && credenciais.getSenha().equals("123456"));
 	}
 
 	@Override
