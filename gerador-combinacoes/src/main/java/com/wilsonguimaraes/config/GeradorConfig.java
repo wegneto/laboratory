@@ -9,27 +9,17 @@ public class GeradorConfig {
 
 	private int dezenasVolante = 6;
 
-	private String nomeConcurso;
+	private String nomeCompleto;
 
-	private String dataSorteio;
+	private String mesNascimento;
 
-	private String horaSorteio;
+	private String diaNascimento;
 
-	private String localSorteio;
+	private String anoNascimento;
 
-	private String numeroConcurso;
+	private String diaAposta;
 
-	private String valorAcumulado;
-
-	private String estimativaPremio;
-
-	// dados apostador
-	private String nomeApostador;
-
-	private String dataNascimento;
-
-	// dados aposta
-	private String dataAposta;
+	private String mesAposta;
 
 	private String diaSemanaAposta;
 
@@ -41,44 +31,28 @@ public class GeradorConfig {
 		return dezenasVolante;
 	}
 
-	public String getNomeConcurso() {
-		return nomeConcurso;
+	public String getNomeCompleto() {
+		return nomeCompleto;
 	}
 
-	public String getDataSorteio() {
-		return dataSorteio;
+	public String getDiaNascimento() {
+		return diaNascimento;
 	}
 
-	public String getHoraSorteio() {
-		return horaSorteio;
+	public String getMesNascimento() {
+		return mesNascimento;
 	}
 
-	public String getLocalSorteio() {
-		return localSorteio;
+	public String getAnoNascimento() {
+		return anoNascimento;
 	}
 
-	public String getNumeroConcurso() {
-		return numeroConcurso;
+	public String getDiaAposta() {
+		return diaAposta;
 	}
 
-	public String getValorAcumulado() {
-		return valorAcumulado;
-	}
-
-	public String getEstimativaPremio() {
-		return estimativaPremio;
-	}
-
-	public String getNomeApostador() {
-		return nomeApostador;
-	}
-
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public String getDataAposta() {
-		return dataAposta;
+	public String getMesAposta() {
+		return mesAposta;
 	}
 
 	public String getDiaSemanaAposta() {
