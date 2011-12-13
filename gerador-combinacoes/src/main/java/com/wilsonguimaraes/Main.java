@@ -20,11 +20,11 @@ public class Main {
 	private Palpitador palpitador;
 
 	public void start(@Observes ContainerInitialized event) {
-		gerador.gerarVolantes(10);
+		//gerador.gerarVolantes(10);
 	}
 
 	public static void main(String[] args) {
-		new StartMain(args).go();
+		//new StartMain(args).go();
 	}
 
 }

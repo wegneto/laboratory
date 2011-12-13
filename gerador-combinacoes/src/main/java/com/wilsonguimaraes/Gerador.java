@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import com.wilsonguimaraes.config.GeradorConfig;
 
 public class Gerador {
-	
+
 	@Inject
 	private GeradorConfig config;
-	
+
 	private ArrayList<TreeSet<Integer>> volantesGerados = new ArrayList<TreeSet<Integer>>();
 
 	public void gerarVolantes(int qtdVolantes) {
@@ -22,7 +22,8 @@ public class Gerador {
 			TreeSet<Integer> volante = new TreeSet<Integer>();
 
 			while (volante.size() < config.getDezenasVolante()) {
-				Integer dezena = 1 + (int) (Math.random() * config.getTotalDezenas());
+				Integer dezena = 1 + (int) (Math.random() * config
+						.getTotalDezenas());
 				if (!dezenasUtilizadas.contains(dezena)) {
 					volante.add(dezena);
 				}
@@ -40,7 +41,7 @@ public class Gerador {
 
 		imprimirVolantes();
 	}
-	
+
 	private void imprimirVolantes() {
 		for (TreeSet<Integer> volante : volantesGerados) {
 			System.out.println(volante);
@@ -55,6 +56,22 @@ public class Gerador {
 		}
 
 		return false;
+	}
+
+	public int getQtdDezenasIguais(TreeSet<Integer> seq1, TreeSet<Integer> seq2) {
+		int qtdDezenasIguais = 0;		
+		
+		if (seq1.equals(seq2)) {
+			qtdDezenasIguais = seq1.size();
+		} else {
+			for (Integer dezena : seq2) {
+				if (seq1.contains(dezena)) {
+					qtdDezenasIguais++;
+				}
+			}
+		}
+		
+		return qtdDezenasIguais;
 	}
 
 }
