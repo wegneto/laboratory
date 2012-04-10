@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<rich:toolbar id="bar">
+		<!-- User not logged in -->
+		<rich:toolbarGroup >
+			<h:outputText value="Home" />
+			<h:outputText value="Sign in" />
+		</rich:toolbarGroup>
+		
+		<!-- Regular user -->
+		<rich:toolbarGroup>
+			<h:outputText value="Open Auctions" />
+			<h:outputText value="My Orders" />
+		</rich:toolbarGroup>
+		
+		<!-- Super user -->
+		<rich:toolbarGroup>
+			<h:outputText value="Categories"></h:outputText>
+			<h:outputText value="Items"></h:outputText>
+		</rich:toolbarGroup>
+		
+		<!-- User logged in -->
+		<rich:toolbarGroup location="right">
+			<h:outputText value="Logoff"></h:outputText>
+		</rich:toolbarGroup>
+	</rich:toolbar>
+
+</ui:composition>

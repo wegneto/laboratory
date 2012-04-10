@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{messages['main.app.title']}</title>
+</h:head>
+
+<h:body>
+	<table style="width: 100%">
+		<tr>
+			<td height="20">
+				<rich:panel>
+					<h:outputText value="Welcome, USUARIO!" />
+				</rich:panel>
+			</td>
+		</tr>
+		<tr>
+			<td height="20">
+				<ui:include src="/menu.xhtml" />
+			</td>
+		</tr>
+		<tr valign="top">
+			<td height="400">
+				<ui:insert name="body" />
+			</td>
+		</tr>
+		<tr align="center">
+			<td height="20" align="center" class="text-input">
+				<h:outputText value="#{messages['main.footer.text']}" />
+			</td>
+		</tr>
+	</table>
+</h:body>
+
+</html>

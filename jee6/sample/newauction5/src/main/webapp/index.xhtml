@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<rich:panel>
+
+			<h:panelGrid columns="2">
+				<rich:panel>
+					<f:facet name="header">Newest Auctions</f:facet>
+				</rich:panel>
+
+				<rich:panel>
+					<f:facet name="header">Most Offered Auctions</f:facet>
+				</rich:panel>
+				
+				<rich:panel bodyClass="inpanelBody">
+	                <f:facet name="header">Auctions Ending Soon</f:facet>
+				</rich:panel>
+				
+				<rich:panel bodyClass="inpanelBody">
+	                <f:facet name="header">Cheapest Price Auctions</f:facet>
+				</rich:panel>
+			</h:panelGrid>
+
+		</rich:panel>
+	</ui:define>
+
+</ui:composition>
