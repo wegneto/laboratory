@@ -8,25 +8,25 @@
 	<rich:toolbar id="bar">
 		<!-- User not logged in -->
 		<rich:toolbarGroup >
-			<h:outputText value="Home" />
-			<h:outputText value="Sign in" />
+			<h:outputText value="#{messages['menu.menuitem.home']}" />
+			<h:outputText value="#{messages['menu.menuitem.sign.in']}" />
 		</rich:toolbarGroup>
 		
 		<!-- Regular user -->
 		<rich:toolbarGroup>
-			<h:outputText value="Open Auctions" />
-			<h:outputText value="My Orders" />
+			<h:outputText value="#{messages['menu.menuitem.open.auctions']}" />
+			<h:outputText value="#{messages['menu.menuitem.my.orders']}" />
 		</rich:toolbarGroup>
 		
 		<!-- Super user -->
 		<rich:toolbarGroup>
-			<h:outputText value="Categories"></h:outputText>
-			<h:outputText value="Items"></h:outputText>
+			<h:outputText value="#{messages['menu.menuitem.categories']}" />
+			<h:outputText value="#{messages['menu.menuitem.items']}" />
 		</rich:toolbarGroup>
 		
 		<!-- User logged in -->
 		<rich:toolbarGroup location="right">
-			<h:outputText value="Logoff"></h:outputText>
+			<h:outputText value="#{messages['menu.menuitem.logoff']}" />
 		</rich:toolbarGroup>
 	</rich:toolbar>
 

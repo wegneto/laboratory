@@ -15,7 +15,9 @@
 		<tr>
 			<td height="20">
 				<rich:panel>
-					<h:outputText value="Welcome, USUARIO!" />
+					<h:outputFormat value="#{messages['main.app.welcome']}" >
+    					<f:param value="USUARIO"/> 
+					</h:outputFormat>
 				</rich:panel>
 			</td>
 		</tr>
