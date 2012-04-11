@@ -7,6 +7,7 @@
 		<non-jta-data-source>java:/DefaultDS</non-jta-data-source>
 		
 		<class>com.wegneto.newauction5.domain.Bookmark</class>
+		<class>com.wegneto.newauction5.domain.Auction</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
