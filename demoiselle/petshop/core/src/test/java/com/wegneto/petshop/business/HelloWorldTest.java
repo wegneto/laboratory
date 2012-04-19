@@ -1,4 +1,4 @@
-package foo;
+package com.wegneto.petshop.business;
 
 import static junit.framework.Assert.assertNotNull;
 
@@ -6,6 +6,9 @@ import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.wegneto.petshop.business.HelloWorld;
+
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 

@@ -1,4 +1,4 @@
-package foo;
+package com.wegneto.petshop.business;
 
 import javax.inject.Inject;
 
