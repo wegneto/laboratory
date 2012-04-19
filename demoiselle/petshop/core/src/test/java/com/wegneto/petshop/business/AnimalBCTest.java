@@ -1,16 +1,26 @@
 package com.wegneto.petshop.business;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
+import javax.inject.Inject;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.wegneto.petshop.business.AnimalBC;
+import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
+import com.wegneto.petshop.domain.Animal;
+
+@RunWith(DemoiselleRunner.class)
 public class AnimalBCTest {
 
+	@Inject
+	private AnimalBC animalBC;
+	
 	@Test
 	public void successfulInsertion() {
-		AnimalBC bc = new AnimalBC();
-		Assert.assertTrue(bc.insert("cachorro"));
+		animalBC.insert(new Animal("Laila"));
+		assertEquals(1, animalBC.findAll().size());
 	}
 
 }

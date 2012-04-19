@@ -1,20 +1,14 @@
 package com.wegneto.petshop.business;
 
-import java.util.ArrayList;
-import java.util.List;
+import br.gov.frameworkdemoiselle.stereotype.BusinessController;
+import br.gov.frameworkdemoiselle.template.DelegateCrud;
 
 import com.wegneto.petshop.domain.Service;
+import com.wegneto.petshop.persistence.ServiceDAO;
 
-public class ServiceBC {
+@BusinessController
+public class ServiceBC extends DelegateCrud<Service, Long, ServiceDAO> {
+
+	private static final long serialVersionUID = -4127437318419234562L;
 	
-	private List<Service> db = new ArrayList<Service>();
-
-	public void insert(Service service) {
-		db.add(service);
-	}
-
-	public List<Service> findAll() {
-		return db;
-	}
-
 }
