@@ -7,58 +7,58 @@
 
 	<ui:define name="body">
 
-		<rich:panel>
-
-			<h:panelGrid columns="2">
-				<h:form id="form">
-					<rich:panel>
-						<f:facet name="header">#{messages['main.newest.auctions.grid']}</f:facet>
-						<rich:dataTable width="700" var="record"
-							value="#{homeMB.listNewest}" rows="10">
-							<rich:column>
-								<f:facet name="header">Product</f:facet>
-								<h:outputText value="#{record.product}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">Price</f:facet>
-								<h:outputText value="#{record.price}">
-									<f:convertNumber currencySymbol="$" maxFractionDigits="2"
-										type="currency" />
-								</h:outputText>
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"></f:facet>
-					            Buy It Now
-				            </rich:column>
-							<rich:column>
-								<f:facet name="header">History</f:facet>
-								<h:outputText value="#{record.history}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">Time Left</f:facet>
-								<h:outputText value="#{record.timeLeft}" />
-							</rich:column>
-							<f:facet name="footer">
-								<rich:dataScroller page="1" />
-							</f:facet>
-						</rich:dataTable>
-					</rich:panel>
-				</h:form>
-
-				<rich:panel>
-					<f:facet name="header">#{messages['main.most.offered.auctions.grid']}</f:facet>
+		<h:outputStylesheet>
+	        .panelColumns td {
+			    vertical-align: top; 
+			}
+	    </h:outputStylesheet>
+	    
+   		<h:panelGrid columns="2" styleClass="panelColumns">
+			<h:form id="form">
+				<rich:panel header="#{messages['main.newest.auctions.grid']}">
+					<rich:dataTable width="700" var="record" value="#{homeMB.listNewest}" rows="10">
+						<rich:column>
+							<f:facet name="header">#{messages['main.grids.header.product']}</f:facet>
+							<h:outputText value="#{record.product}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">#{messages['main.grids.header.price']}</f:facet>
+							<h:outputText value="#{record.price}">
+								<f:convertNumber currencySymbol="$" maxFractionDigits="2" type="currency" />
+							</h:outputText>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"></f:facet>
+				            Buy It Now
+			            </rich:column>
+						<rich:column>
+							<f:facet name="header">#{messages['main.grids.header.history']}</f:facet>
+							<h:outputText value="#{record.history}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">#{messages['main.grids.header.timeleft']}</f:facet>
+							<h:outputText value="#{record.timeLeft}" />
+						</rich:column>
+						<f:facet name="footer">
+							<rich:dataScroller page="1" />
+						</f:facet>
+					</rich:dataTable>
 				</rich:panel>
+			</h:form>
 
-				<rich:panel bodyClass="inpanelBody">
-					<f:facet name="header">#{messages['main.auctions.ending.soon.grid']}</f:facet>
-				</rich:panel>
+			<rich:panel>
+				<f:facet name="header">#{messages['main.most.offered.auctions.grid']}</f:facet>
+			</rich:panel>
 
-				<rich:panel bodyClass="inpanelBody">
-					<f:facet name="header">#{messages['main.cheapest.price.auctions.grid']}</f:facet>
-				</rich:panel>
-			</h:panelGrid>
+			<rich:panel>
+				<f:facet name="header">#{messages['main.auctions.ending.soon.grid']}</f:facet>
+			</rich:panel>
 
-		</rich:panel>
+			<rich:panel>
+				<f:facet name="header">#{messages['main.cheapest.price.auctions.grid']}</f:facet>
+			</rich:panel>
+		</h:panelGrid>
+
 	</ui:define>
 
 </ui:composition>
