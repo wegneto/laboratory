@@ -5,9 +5,10 @@
 	<!-- If you are using tomcat6/tomcat7/junit then use this persistence-unit -->
 	<!--
 	-->
-	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="newauction5-test-ds" transaction-type="RESOURCE_LOCAL">
 
 		<class>com.wegneto.newauction5.domain.Bookmark</class>
+		<class>com.wegneto.newauction5.domain.Auction</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
