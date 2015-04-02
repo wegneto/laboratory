@@ -21,6 +21,10 @@ public class PessoaDAO {
         em.persist(pessoa);
     }
     
+    public void update(Pessoa pessoa) {
+        em.merge(pessoa);
+    }
+    
     public Pessoa load(Integer id) {
         return em.find(Pessoa.class, id);
     }
