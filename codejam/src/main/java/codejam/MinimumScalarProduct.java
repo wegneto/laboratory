@@ -15,20 +15,20 @@ public class MinimumScalarProduct {
 		Arrays.sort(array2, Collections.reverseOrder());
 
 		for (int i = 0; i < array1.length; i++) {
-			result += (Short.parseShort(array1[i]) * Short.parseShort(array2[i]));
+			result += (Integer.parseInt(array1[i]) * Integer.parseInt(array2[i]));
 		}
 
 		return result;
 	}
 
-	public StringBuffer parseInput(StringBuffer input) {
+	public StringBuilder parseInput(StringBuilder input) {
 		String[] s = input.toString().split("\n");
 		int caseNumber = 1;
 
-		StringBuffer output = new StringBuffer();
+		StringBuilder output = new StringBuilder();
 
 		for (int i = 1; i < s.length; i = i + 3) {
-			short result = this.calculate(s[i + 1], s[i + 2]);
+			int result = this.calculate(s[i + 1], s[i + 2]);
 
 			output.append("Case #").append(caseNumber).append(": ").append(result).append("\n");
 			caseNumber++;
