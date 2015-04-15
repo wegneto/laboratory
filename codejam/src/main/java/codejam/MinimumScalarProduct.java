@@ -21,8 +21,8 @@ public class MinimumScalarProduct {
 		return result;
 	}
 
-	public String parseInput(String input) {
-		String[] s = input.split("\n");
+	public StringBuffer parseInput(StringBuffer input) {
+		String[] s = input.toString().split("\n");
 		int caseNumber = 1;
 
 		StringBuffer output = new StringBuffer();
@@ -34,7 +34,7 @@ public class MinimumScalarProduct {
 			caseNumber++;
 		}
 
-		return output.toString();
+		return output;
 	}
 
 }

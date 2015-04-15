@@ -28,7 +28,7 @@ public class MinimumScalarProductTest {
 	}
 
 	@Test
-	public void treatMultipeLinesInput() {
+	public void treatMultipleLinesInput() {
 		StringBuffer input = new StringBuffer();
 		input.append("2\n");
 		input.append("3\n");
@@ -37,13 +37,18 @@ public class MinimumScalarProductTest {
 		input.append("5\n");
 		input.append("1 2 3 4 5\n");
 		input.append("1 0 1 0 1\n");
-		String output = (new MinimumScalarProduct()).parseInput(input.toString());
+		StringBuffer output = (new MinimumScalarProduct()).parseInput(input);
 
 		StringBuffer expectedOutput = new StringBuffer();
 		expectedOutput.append("Case #1: -25\n");
 		expectedOutput.append("Case #2: 6\n");
 		
-		assertEquals(expectedOutput.toString(), output);
+		assertEquals(expectedOutput.toString(), output.toString());
+	}
+	
+	@Test
+	public void parseInputFile() {
+		
 	}
 
 }
