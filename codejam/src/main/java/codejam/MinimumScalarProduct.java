@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class MinimumScalarProduct {
 
-	public short treatInput(String input1, String input2) {
+	public short calculate(String input1, String input2) {
 		String[] array1 = input1.split(" ");
 		String[] array2 = input2.split(" ");
 
@@ -28,7 +28,7 @@ public class MinimumScalarProduct {
 		StringBuffer output = new StringBuffer();
 
 		for (int i = 1; i < s.length; i = i + 3) {
-			short result = this.treatInput(s[i + 1], s[i + 2]);
+			short result = this.calculate(s[i + 1], s[i + 2]);
 
 			output.append("Case #").append(caseNumber).append(": ").append(result).append("\n");
 			caseNumber++;

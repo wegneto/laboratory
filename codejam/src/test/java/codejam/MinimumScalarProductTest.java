@@ -9,21 +9,21 @@ public class MinimumScalarProductTest {
 	@Test
 	public void treatInputWithSameValues() {
 		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.treatInput("2 2", "2 2");
+		short output = msp.calculate("2 2", "2 2");
 		assertEquals(8, output);
 	}
 
 	@Test
 	public void treatInputWithDifferentValues() {
 		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.treatInput("2 3", "2 3");
+		short output = msp.calculate("2 3", "2 3");
 		assertEquals(12, output);
 	}
 
 	@Test
 	public void treatInputWithDifferentValuesOutOfOrder() {
 		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.treatInput("1 3 -5", "-2 4 1");
+		short output = msp.calculate("1 3 -5", "-2 4 1");
 		assertEquals(-25, output);
 	}
 
