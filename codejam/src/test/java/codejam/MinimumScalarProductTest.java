@@ -3,6 +3,12 @@ package codejam;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MinimumScalarProductTest {
@@ -56,25 +62,33 @@ public class MinimumScalarProductTest {
 
 	@Test
 	public void parseSmallDataset() {
-		long startTime = System.currentTimeMillis();
-		(new MinimumScalarProduct()).parseFile("/Users/wegneto/Desenvolvimento/workspace/lab/codejam/src/test/resources/A-small-practice.in");
-		long endTime = System.currentTimeMillis();
-		
-		long totalTime = endTime - startTime;
-		
-		assertTrue(totalTime < 180000);
-		
+		try {
+			parseFile("/A-small-practice.in");
+		} catch (URISyntaxException e) {
+			Assert.fail();
+		}
 	}
 
 	@Test
 	public void parseBigDataset() {
+		try {
+			parseFile("/A-large-practice.in");
+		} catch (URISyntaxException e) {
+			Assert.fail();
+		}
+	}
+
+	private void parseFile(String fileName) throws URISyntaxException {
+		URL resourceUrl = getClass().getResource(fileName);
+		Path resourcePath = Paths.get(resourceUrl.toURI());
+		
 		long startTime = System.currentTimeMillis();
-		(new MinimumScalarProduct()).parseFile("/Users/wegneto/Desenvolvimento/workspace/lab/codejam/src/test/resources/A-large-practice.in");
+		(new MinimumScalarProduct()).parseFile(resourcePath.toString());
 		long endTime = System.currentTimeMillis();
 		
 		long totalTime = endTime - startTime;
 		
 		assertTrue(totalTime < 180000);
 	}
-
+	
 }
