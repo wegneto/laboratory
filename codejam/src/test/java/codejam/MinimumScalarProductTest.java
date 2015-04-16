@@ -1,34 +1,38 @@
 package codejam;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.Iterator;
-import java.util.Random;
-import java.util.stream.IntStream;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class MinimumScalarProductTest {
 
 	@Test
-	public void treatInputWithSameValues() {
+	public void calculateSimplestInput() {
 		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.calculate("2 2", "2 2");
-		assertEquals(8, output);
+		long output = msp.calculate("1 1", "1 1");
+		assertEquals(2, output);
+	}
+	
+	@Test
+	public void calculateInputWithDifferentNumbers() {
+		MinimumScalarProduct msp = new MinimumScalarProduct();
+		long output = msp.calculate("1 2", "3 4");
+		assertEquals(10, output);
 	}
 
 	@Test
-	public void treatInputWithDifferentValues() {
+	public void calculateInputWithNegativeNumbers() {
 		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.calculate("2 3", "2 3");
-		assertEquals(12, output);
-	}
-
-	@Test
-	public void treatInputWithDifferentValuesOutOfOrder() {
-		MinimumScalarProduct msp = new MinimumScalarProduct();
-		short output = msp.calculate("1 3 -5", "-2 4 1");
+		long output = msp.calculate("1 3 -5", "-2 4 1");
 		assertEquals(-25, output);
+	}
+	
+	@Test
+	public void calculateInputWithTwoNegativeNumbers() {
+		MinimumScalarProduct msp = new MinimumScalarProduct();
+		long output = msp.calculate("-5 3 1", "-2 -4 1");
+		assertEquals(-19, output);
 	}
 
 	@Test
@@ -43,7 +47,7 @@ public class MinimumScalarProductTest {
 		input.append("1 0 1 0 1\n");
 		StringBuilder output = (new MinimumScalarProduct()).parseInput(input);
 
-		StringBuffer expectedOutput = new StringBuffer();
+		StringBuilder expectedOutput = new StringBuilder();
 		expectedOutput.append("Case #1: -25\n");
 		expectedOutput.append("Case #2: 6\n");
 
@@ -52,54 +56,25 @@ public class MinimumScalarProductTest {
 
 	@Test
 	public void parseSmallDataset() {
-		Random randomGenerator = new Random();
-		IntStream is = randomGenerator.ints(-1000, 1001);
-		Iterator<Integer> it = is.iterator();
-
-		StringBuilder input = new StringBuilder();
-		input.append("1000\n");
-
-		for (int t = 1; t < 1001; t++) {
-			int n = randomGenerator.nextInt(8) + 1;
-			input.append(n).append("\n");
-
-			for (int i = 0; i < (n * 2); i++) {
-				input.append(it.next()).append(" ");
-				if ((i == (n - 1)) || (i == ((n * 2) - 1))) {
-					input.append("\n");
-				}
-			}
-
-		}
+		long startTime = System.currentTimeMillis();
+		(new MinimumScalarProduct()).parseFile("/Users/wegneto/Desenvolvimento/workspace/lab/codejam/src/test/resources/A-small-practice.in");
+		long endTime = System.currentTimeMillis();
 		
-		StringBuilder output = (new MinimumScalarProduct()).parseInput(input);
-		System.out.println(output.toString());
+		long totalTime = endTime - startTime;
+		
+		assertTrue(totalTime < 180000);
+		
 	}
-	
+
 	@Test
 	public void parseBigDataset() {
-		Random randomGenerator = new Random();
-		IntStream is = randomGenerator.ints(-100000, 100001);
-		Iterator<Integer> it = is.iterator();
-
-		StringBuilder input = new StringBuilder();
-		input.append("10\n");
-
-		for (int t = 1; t < 11; t++) {
-			int n = randomGenerator.nextInt(800) + 1;
-			input.append(n).append("\n");
-
-			for (int i = 0; i < (n * 2); i++) {
-				input.append(it.next()).append(" ");
-				if ((i == (n - 1)) || (i == ((n * 2) - 1))) {
-					input.append("\n");
-				}
-			}
-
-		}
+		long startTime = System.currentTimeMillis();
+		(new MinimumScalarProduct()).parseFile("/Users/wegneto/Desenvolvimento/workspace/lab/codejam/src/test/resources/A-large-practice.in");
+		long endTime = System.currentTimeMillis();
 		
-		StringBuilder output = (new MinimumScalarProduct()).parseInput(input);
-		System.out.println(output.toString());
+		long totalTime = endTime - startTime;
+		
+		assertTrue(totalTime < 180000);
 	}
 
 }
