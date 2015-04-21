@@ -4,24 +4,32 @@ public class Milkshakes {
 
 	public String getBatches(int numFlavors, int numCustomers, int[][] customerFlavors) {
 		int[] result = new int[numFlavors];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = -1;
-		}
-
+		boolean[] satisfied = new boolean[numCustomers];
 		boolean possible = true;
+		boolean redo = true;
 
-		for (int customer = 0; customer < numCustomers; customer++) {
-			for (int cf = 0; cf < customerFlavors[customer].length; cf++) {
-				int flavor = customerFlavors[customer][cf] - 1;
-				int malted = customerFlavors[customer][++cf];
+		while (redo && possible) {
+			redo = false;
+			for (int customer = 0; customer < numCustomers; customer++) {
+				for (int cf = 0; cf < customerFlavors[customer].length; cf++) {
+					int flavor = customerFlavors[customer][cf] - 1;
+					int malted = customerFlavors[customer][++cf];
 
-				if (result[flavor] != -1 && result[flavor] != malted && ((cf + 1) >= customerFlavors[customer].length)) {
-					possible = false;
-				} else if (result[flavor] == -1){
-					result[flavor] = malted;
+					if (result[flavor] == 0 && malted == 1) {
+						result[flavor] = malted;
+						redo = true;
+					}
+
+					satisfied[customer] = (result[flavor] == malted);
 				}
-
 			}
+
+			if (!redo) {
+				for (int i = 0; i < satisfied.length; i++) {
+					possible = (possible && satisfied[i]);
+				}
+			}
+
 		}
 
 		StringBuilder output = new StringBuilder();
