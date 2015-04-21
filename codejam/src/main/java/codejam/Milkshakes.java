@@ -7,19 +7,20 @@ public class Milkshakes {
 		for (int i = 0; i < result.length; i++) {
 			result[i] = -1;
 		}
-		
+
 		boolean possible = true;
 
 		for (int customer = 0; customer < numCustomers; customer++) {
 			for (int cf = 0; cf < customerFlavors[customer].length; cf++) {
 				int flavor = customerFlavors[customer][cf] - 1;
 				int malted = customerFlavors[customer][++cf];
-				
-				if (result[flavor] != -1 && result[flavor] != malted) {
+
+				if (result[flavor] != -1 && result[flavor] != malted && ((cf + 1) >= customerFlavors[customer].length)) {
 					possible = false;
+				} else if (result[flavor] == -1){
+					result[flavor] = malted;
 				}
-				
-				result[flavor] = malted;
+
 			}
 		}
 

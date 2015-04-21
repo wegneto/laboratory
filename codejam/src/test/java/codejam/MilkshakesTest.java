@@ -38,8 +38,14 @@ public class MilkshakesTest {
 
 	@Test
 	public void getBatchesForTwoClientsOneFlavorOneMalted() {
-		String output = (new Milkshakes()).getBatches(1	, 2, new int[][] { { 1, 1 }, { 1, 0 } });
+		String output = (new Milkshakes()).getBatches(1, 2, new int[][] { { 1, 1 }, { 1, 0 } });
 		assertEquals("Case #1: IMPOSSIBLE", output);
+	}
+
+	@Test
+	public void getBatchesForThreeClientsFiveFlavorsOneMalted() {
+		String output = (new Milkshakes()).getBatches(5, 3, new int[][] { { 1, 1 }, { 1, 0, 2, 0 }, { 5, 0 } });
+		assertEquals("Case #1: 1 0 0 0 0 ", output);
 	}
 
 }
