@@ -44,14 +44,15 @@ public class Milkshakes {
 		}
 
 		StringBuilder output = new StringBuilder();
-		output.append("Case #").append(test).append(": ");
+		output.append("Case #").append(test).append(":");
 		if (possible) {
 			for (int i = 0; i < result.length; i++) {
-				output.append(result[i] != -1 ? result[i] : 0).append(" ");
+				output.append(" ");
+				output.append(result[i] != -1 ? result[i] : 0);
 			}
 
 		} else {
-			output.append("IMPOSSIBLE");
+			output.append(" IMPOSSIBLE");
 		}
 
 		return output.toString();

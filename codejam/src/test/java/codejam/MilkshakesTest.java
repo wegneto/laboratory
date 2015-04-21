@@ -17,25 +17,25 @@ public class MilkshakesTest {
 	@Test
 	public void oneClientOneFlavorUnmalted() {
 		String output = (new Milkshakes()).getBatches(1, 1, 1, new int[][] { { 1, 0 } });
-		assertEquals("Case #1: 0 ", output);
+		assertEquals("Case #1: 0", output);
 	}
 
 	@Test
 	public void oneClientOneFlavorMalted() {
 		String output = (new Milkshakes()).getBatches(1, 1, 1, new int[][] { { 1, 1 } });
-		assertEquals("Case #1: 1 ", output);
+		assertEquals("Case #1: 1", output);
 	}
 
 	@Test
 	public void twoClientsOneFlavorUnmalted() {
 		String output = (new Milkshakes()).getBatches(1, 1, 2, new int[][] { { 1, 0 }, { 1, 0 } });
-		assertEquals("Case #1: 0 ", output);
+		assertEquals("Case #1: 0", output);
 	}
 
 	@Test
 	public void twoClientsOneFlavorMalted() {
 		String output = (new Milkshakes()).getBatches(1, 1, 2, new int[][] { { 1, 1 }, { 1, 1 } });
-		assertEquals("Case #1: 1 ", output);
+		assertEquals("Case #1: 1", output);
 	}
 
 	@Test
@@ -59,13 +59,13 @@ public class MilkshakesTest {
 	@Test
 	public void twoClientsTwoFlavorsUnmalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 0, 2, 0 }, { 1, 0, 2, 0 } });
-		assertEquals("Case #1: 0 0 ", output);
+		assertEquals("Case #1: 0 0", output);
 	}
 
 	@Test
 	public void twoClientsTwoFlavorsOneMalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 1, 2, 0 }, { 1, 0, 2, 0 } });
-		assertEquals("Case #1: 1 0 ", output);
+		assertEquals("Case #1: 1 0", output);
 	}
 
 	@Test
@@ -77,19 +77,19 @@ public class MilkshakesTest {
 	@Test
 	public void twoClientsTwoFlavorsThreeMalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 1, 2, 1 }, { 1, 1, 2, 0 } });
-		assertEquals("Case #1: 1 1 ", output);
+		assertEquals("Case #1: 1 1", output);
 	}
 
 	@Test
 	public void twoClientsTwoFlavorsAllMalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 1, 2, 1 }, { 1, 1, 2, 1 } });
-		assertEquals("Case #1: 1 1 ", output);
+		assertEquals("Case #1: 1 1", output);
 	}
 
 	@Test
 	public void twoClientsTwoFlavorsOneUnmaltedThreeMalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 0, 2, 1 }, { 1, 1, 2, 1 } });
-		assertEquals("Case #1: 1 1 ", output);
+		assertEquals("Case #1: 1 1", output);
 	}
 
 	@Test
@@ -101,13 +101,13 @@ public class MilkshakesTest {
 	@Test
 	public void twoClientsTwoFlavorsThreeUnmaltedOneMalted() {
 		String output = (new Milkshakes()).getBatches(1, 2, 2, new int[][] { { 1, 0, 2, 0 }, { 1, 0, 2, 1 } });
-		assertEquals("Case #1: 0 1 ", output);
+		assertEquals("Case #1: 0 1", output);
 	}
 
 	@Test
 	public void threeClientsFiveFlavorsOneMalted() {
 		String output = (new Milkshakes()).getBatches(1, 5, 3, new int[][] { { 1, 1 }, { 1, 0, 2, 0 }, { 5, 0 } });
-		assertEquals("Case #1: 1 0 0 0 0 ", output);
+		assertEquals("Case #1: 1 0 0 0 0", output);
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class MilkshakesTest {
 		}
 		
 		String output = (new Milkshakes()).getBatches(1, qtyFlavors, qtyCustomers, customerFlavors);
-		assertEquals("Case #1: 0 0 0 0 0 ", output);
+		assertEquals("Case #1: 0 0 0 0 0", output);
 
 	}
 
