@@ -1,14 +1,21 @@
 package codejam;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 public class Milkshakes {
 
-	public String getBatches(int numFlavors, int numCustomers, int[][] customerFlavors) {
+	public String getBatches(int test, int numFlavors, int numCustomers, int[][] customerFlavors) {
 		int[] result = new int[numFlavors];
-		boolean[] satisfied = new boolean[numCustomers];
+		boolean[][] satisfied = new boolean[numCustomers][numFlavors];
 		boolean possible = true;
 		boolean redo = true;
 
-		while (redo && possible) {
+		while (redo) {
 			redo = false;
 			for (int customer = 0; customer < numCustomers; customer++) {
 				for (int cf = 0; cf < customerFlavors[customer].length; cf++) {
@@ -20,20 +27,24 @@ public class Milkshakes {
 						redo = true;
 					}
 
-					satisfied[customer] = (result[flavor] == malted);
+					satisfied[customer][flavor] = (result[flavor] == malted);
 				}
 			}
 
 			if (!redo) {
-				for (int i = 0; i < satisfied.length; i++) {
-					possible = (possible && satisfied[i]);
+				for (int customer = 0; customer < satisfied.length; customer++) {
+					boolean temp = false;
+					for (int flavor = 0; flavor < satisfied[customer].length; flavor++) {
+						temp = temp || satisfied[customer][flavor];
+					}
+					possible = (possible && temp);
 				}
 			}
 
 		}
 
 		StringBuilder output = new StringBuilder();
-		output.append("Case #1: ");
+		output.append("Case #").append(test).append(": ");
 		if (possible) {
 			for (int i = 0; i < result.length; i++) {
 				output.append(result[i] != -1 ? result[i] : 0).append(" ");
@@ -44,6 +55,44 @@ public class Milkshakes {
 		}
 
 		return output.toString();
+	}
+
+	public void parseFile(String fileName) {
+		Path path = Paths.get(fileName);
+		StringBuilder output = new StringBuilder();
+
+		try (Scanner scanner = new Scanner(path)) {
+			int numTest = scanner.nextInt();
+
+			for (int test = 1; test <= numTest; test++) {
+				int numFlavor = scanner.nextInt();
+				int numCustomer = scanner.nextInt();
+				int[][] customerFlavors = new int[numCustomer][];
+
+				for (int customer = 0; customer < numCustomer; customer++) {
+					int numCustFlavors = scanner.nextInt() * 2;
+					customerFlavors[customer] = new int[numCustFlavors];
+					for (int custFlavors = 0; custFlavors < numCustFlavors; custFlavors++) {
+						customerFlavors[customer][custFlavors] = scanner.nextInt();
+					}
+				}
+				
+				output.append(this.getBatches(test, numFlavor, numCustomer, customerFlavors)).append("\n");
+			}
+
+			String out = fileName.replaceAll(".in", ".out");
+
+			writeLargerTextFile(out, output.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void writeLargerTextFile(String aFileName, String content) throws IOException {
+		Path path = Paths.get(aFileName);
+		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+			writer.write(content);
+		}
 	}
 
 }
