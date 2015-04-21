@@ -4,22 +4,37 @@ public class Milkshakes {
 
 	public String getBatches(int numFlavors, int numCustomers, int[][] customerFlavors) {
 		int[] result = new int[numFlavors];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = -1;
+		}
+		
+		boolean possible = true;
 
 		for (int customer = 0; customer < numCustomers; customer++) {
-			for (int flavor = 0; flavor < numFlavors; flavor++) {
-				for (int i = 0; i < customerFlavors[customer].length; i = i + 2) {
-					if (customerFlavors[customer][i] == (flavor + 1)) {
-						result[flavor] = customerFlavors[customer][i + 1];
-					}
+			for (int cf = 0; cf < customerFlavors[customer].length; cf++) {
+				int flavor = customerFlavors[customer][cf] - 1;
+				int malted = customerFlavors[customer][++cf];
+				
+				if (result[flavor] != -1 && result[flavor] != malted) {
+					possible = false;
 				}
+				
+				result[flavor] = malted;
 			}
 		}
 
 		StringBuilder output = new StringBuilder();
-		for (int i = 0; i < result.length; i++) {
-			output.append(result[i]).append(" ");
+		output.append("Case #1: ");
+		if (possible) {
+			for (int i = 0; i < result.length; i++) {
+				output.append(result[i] != -1 ? result[i] : 0).append(" ");
+			}
+
+		} else {
+			output.append("IMPOSSIBLE");
 		}
 
-		return "Case #1: " + output.toString();
+		return output.toString();
 	}
+
 }

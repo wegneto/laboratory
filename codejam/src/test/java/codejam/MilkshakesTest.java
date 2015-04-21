@@ -29,11 +29,17 @@ public class MilkshakesTest {
 		String output = (new Milkshakes()).getBatches(5, 2, new int[][] { { 1, 0 }, { 2, 0, 4, 0 } });
 		assertEquals("Case #1: 0 0 0 0 0 ", output);
 	}
-	
+
 	@Test
 	public void getBatchesForTwoClientsThatLikeFourFlavorsOneMaltedBetweenFiveFlavors() {
 		String output = (new Milkshakes()).getBatches(5, 2, new int[][] { { 1, 0, 3, 1 }, { 2, 0, 4, 0 } });
 		assertEquals("Case #1: 0 0 1 0 0 ", output);
+	}
+
+	@Test
+	public void getBatchesForTwoClientsOneFlavorOneMalted() {
+		String output = (new Milkshakes()).getBatches(1	, 2, new int[][] { { 1, 1 }, { 1, 0 } });
+		assertEquals("Case #1: IMPOSSIBLE", output);
 	}
 
 }
