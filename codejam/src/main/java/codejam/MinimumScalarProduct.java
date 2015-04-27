@@ -1,12 +1,12 @@
 package codejam;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import codejam.util.FileUtil;
 
 public class MinimumScalarProduct {
 
@@ -63,18 +63,11 @@ public class MinimumScalarProduct {
 			String output = this.parseInput(input).toString();
 			String out = fileName.replaceAll(".in", ".out");
 
-			writeLargerTextFile(out, output);
+			FileUtil.writeLargerTextFile(out, output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void writeLargerTextFile(String aFileName, String content) throws IOException {
-		Path path = Paths.get(aFileName);
-		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-			writer.write(content);
-		}
 	}
 	
 }

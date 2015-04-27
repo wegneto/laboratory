@@ -1,16 +1,13 @@
 package codejam;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import codejam.util.FileUtil;
 
 public class StoreCredit {
 
@@ -56,13 +53,6 @@ public class StoreCredit {
 		return output.toString();
 	}
 	
-	public void writeLargerTextFile(String aFileName, String content) throws IOException {
-		Path path = Paths.get(aFileName);
-		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-			writer.write(content);
-		}
-	}
-	
 	public static void main(String[] args) {
 		try {
 			URL resourceUrl = StoreCredit.class.getResource("/store-credit-large-practice.in");
@@ -73,7 +63,7 @@ public class StoreCredit {
 			
 			String outputFile = resourcePath.toString().replaceAll(".in", ".out");
 
-			storeCredit.writeLargerTextFile(outputFile, output);
+			FileUtil.writeLargerTextFile(outputFile, output);
 		} catch (URISyntaxException e) {
 		} catch (IOException e) {
 			e.printStackTrace();

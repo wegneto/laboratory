@@ -1,11 +1,11 @@
 package codejam;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import codejam.util.FileUtil;
 
 public class Milkshakes {
 
@@ -83,16 +83,9 @@ public class Milkshakes {
 
 			String out = fileName.replaceAll(".in", ".out");
 
-			writeLargerTextFile(out, output.toString());
+			FileUtil.writeLargerTextFile(out, output.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public void writeLargerTextFile(String aFileName, String content) throws IOException {
-		Path path = Paths.get(aFileName);
-		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-			writer.write(content);
 		}
 	}
 
