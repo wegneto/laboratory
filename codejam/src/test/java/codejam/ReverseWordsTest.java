@@ -10,14 +10,13 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-
 public class ReverseWordsTest {
-	
+
 	@Test
 	public void test1() {
 		String expected = "test a is this";
 		String output = (new ReverseWords()).reverse("this is a test");
-		
+
 		assertEquals(expected, output);
 	}
 
@@ -25,18 +24,18 @@ public class ReverseWordsTest {
 	public void test2() {
 		String expected = "foobar";
 		String output = (new ReverseWords()).reverse("foobar");
-		
+
 		assertEquals(expected, output);
 	}
-	
+
 	@Test
 	public void test3() {
 		String expected = "all your base";
 		String output = (new ReverseWords()).reverse("base your all");
-		
+
 		assertEquals(expected, output);
 	}
-	
+
 	@Test
 	public void fourthTest() {
 		StringBuilder expected = new StringBuilder();
