@@ -33,5 +33,14 @@ public class AlienLanguageTest {
 		String output = (new AlienLanguage()).evaluate(dictionary, testCase);
 		Assert.assertEquals("Case #1: 0", output);
 	}
+	
+	@Test
+	public void combinationInTheDictionary() {
+		ArrayList<String> dictionary = this.loadDictionary(new String[] { "abc", "bca", "dac", "dbc", "cba" });
+		String testCase = "(ab)(bc)(ca)";
+
+		String output = (new AlienLanguage()).evaluate(dictionary, testCase);
+		Assert.assertEquals("Case #1: 2", output);
+	}
 
 }
