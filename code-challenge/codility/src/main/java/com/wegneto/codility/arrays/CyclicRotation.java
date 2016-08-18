@@ -2,32 +2,29 @@ package com.wegneto.codility.arrays;
 
 public class CyclicRotation {
 
-	public int[] solution(int[] A, int K) {
-		if (K == 0 || A.length == 0 || (K % A.length) == 0) {
-			return A;
+	public int[] solution(int[] array, int rotations) {
+		if (rotations == 0 || array.length == 0 || (rotations % array.length) == 0) {
+			return array;
 		}
 
-		int increment = K % A.length;
-		int[] result = new int[A.length];
+		int increment = rotations % array.length;
+		int[] result = new int[array.length];
 
-		for (int i = 0; i < A.length; i++) {
-			int index = i + increment;
+		for (int i = 0; i < array.length; i++) {
+			int index = i + increment; 
 			
-			if (index >= A.length) {
-				index -= A.length;
+			if (index >= array.length) {
+				index -= array.length;
 			}
 			
-			result[index] = A[i];
+			result[index] = array[i];
 		}
-
+		
 		return result;
 	}
 
 	public static void main(String[] args) {
-		int[] test = new CyclicRotation().solution(new int[] { 0, 1, 2, 3, 4 }, 15897);
-		for (int i = 0; i < test.length; i++) {
-			System.out.print(test[i] + " ");
-		}
+		new CyclicRotation().solution(new int[] { 0, 1, 2, 3, 4 }, 3);
 	}
 
 }
