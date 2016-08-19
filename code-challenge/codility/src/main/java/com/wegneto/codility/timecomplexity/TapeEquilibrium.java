@@ -3,29 +3,27 @@ package com.wegneto.codility.timecomplexity;
 public class TapeEquilibrium {
 
 	public int solution(int[] arr) {
-		int sum = 0;
-		int[] leftValues = new int[arr.length - 1];
-		for (int i = 0; i < arr.length - 1; i++) {
-			sum += arr[i];
-			leftValues[i] = sum;
+		int lSum = arr[0];
+		int rSum = 0;
+		
+		for (int i = 1; i < arr.length; i++) {
+			rSum += arr[i];
 		}
 
-		int[] rightValues = new int[arr.length - 1];
-		sum = 0;
-		for (int i = arr.length - 1; i > 0; i--) {
-			sum += arr[i];
-			rightValues[i - 1] = sum;
-		}
-
-		sum = Math.abs(leftValues[0] - rightValues[0]);
+		int min = Math.abs(lSum - rSum);
+		
 		for (int i = 1; i < arr.length - 1; i++) {
-			int aux = Math.abs(leftValues[i] - rightValues[i]);
-			if (aux < sum) {
-				sum = aux;
+			lSum += arr[i];
+			rSum -= arr[i];
+			
+			int diff = Math.abs(lSum - rSum);
+			
+			if (diff < min) {
+				min = diff;
 			}
 		}
 
-		return sum;
+		return min;
 	}
 
 	public static void main(String[] args) {
