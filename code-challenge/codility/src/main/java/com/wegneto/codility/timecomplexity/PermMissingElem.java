@@ -7,15 +7,15 @@ public class PermMissingElem {
 		for (int i = 0; i < arr.length; i++) {
 			sum += arr[i];
 		}
-		
+
 		final long N = arr.length + 1;
 		final long gaussSum = (N * (N + 1)) / 2;
 
-		return (int)(gaussSum - sum);
+		return (int) (gaussSum - sum);
 	}
 
 	public static void main(String[] args) {
-		new PermMissingElem().solution(new int[] { });
+		System.out.println(new PermMissingElem().solution(new int[] { 2, 3, 1, 5 }));
 	}
 
 }
