@@ -16,7 +16,7 @@ public class PermCheck {
 			}
 		}
 
-		return 1;//(gaussSum == sum ? 1 : 0);
+		return 1;
 	}
 
 	public static void main(String[] args) {
