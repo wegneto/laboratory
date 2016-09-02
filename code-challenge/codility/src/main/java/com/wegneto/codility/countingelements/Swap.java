@@ -17,7 +17,6 @@ public class Swap {
 				sumA += change;
 				sumB -= change;
 				if (sumA == sumB) {
-					System.out.println("swap B[j]: " + B[j] + " por A[i]: " + A[i]);
 					return true;
 				}
 				sumA -= change;
