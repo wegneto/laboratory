@@ -14,7 +14,7 @@ public class FrogRiverOne {
 		int greatest = -1;
 		
 		for (int i = 0; i < result.length; i++) {
-			if (greatest < result[i]) {
+			if (result[i] != 0 && greatest < result[i]) {
 				greatest = result[i];
 			}
 		}
@@ -24,6 +24,7 @@ public class FrogRiverOne {
 
 	public static void main(String[] args) {
 		new FrogRiverOne().solution(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 });
+		new FrogRiverOne().solution(5, new int[] { 3 });
 	}
 
 }
