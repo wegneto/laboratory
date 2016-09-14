@@ -15,7 +15,7 @@ public class PrefixSum {
 	}
 	
 	private int countTotal(int[] P, int x, int y) {
-		return P[y + 1] - P[x];	
+		return P[y + 1] - P[x];	 
 	}
 	
 	public static void main(String[] args) {
