@@ -1,0 +1,16 @@
+package com.wegneto.codility.prefixsum;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class PassingCarsTest {
+
+	@Test
+	public void simpleTest() {
+		PassingCars pc = new PassingCars();
+		int result = pc.solution(new int[] { 0, 1, 0, 1, 1 });
+		assertEquals(5, result);
+	}
+
+}
