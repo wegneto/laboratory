@@ -22,8 +22,8 @@ public class PrefixSum {
 
 	public static void main(String[] args) {
 		PrefixSum prefixSum = new PrefixSum();
-		int[] P = prefixSum.getPrefixSum(new int[] { 0, 0, 0, 0, 1, 1, 1, 1 });
-		System.out.println(prefixSum.countTotal(P, 0, 4));
+		int[] P = prefixSum.getPrefixSum(new int[] { 6, 7, 8, 9, 10, 11, 12 });
+		System.out.println(prefixSum.countTotal(P, 0, 6));
 	}
 
 }
